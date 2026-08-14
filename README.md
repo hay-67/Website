@@ -9,7 +9,7 @@
 
 **Module Name:** Web Development
 
-**Module Code:** WEBDE5020
+**Module Code:** WEDE5020
 
 ---
 

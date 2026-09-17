@@ -130,6 +130,221 @@ img {
         0 10px 35px rgba(0, 255, 240, 0.12);
 }
 
+```css
+/* ==============================
+   NEON NEXUS HEADER
+   ============================== */
+
+.site-header {
+    width: 92%;
+    max-width: 1400px;
+    margin: 2rem auto;
+
+    padding: 1.5rem 2rem;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 1.5rem;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 8px 35px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* ==============================
+   LOGO AREA
+   ============================== */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo-area img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 8px rgba(0, 217, 255, 0.35))
+        drop-shadow(0 0 15px rgba(138, 43, 226, 0.25));
+}
+
+.brand-text h1 {
+    margin: 0;
+
+    font-size: 2.7rem;
+    letter-spacing: 0.12em;
+
+    background: linear-gradient(
+        90deg,
+        var(--nexus-white),
+        var(--nexus-cyan)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 20px rgba(0, 217, 255, 0.15);
+}
+
+.brand-text p {
+    margin: 0.25rem 0 0;
+
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+
+    color: var(--nexus-grey);
+}
+
+
+/* ==============================
+   NAVIGATION
+   ============================== */
+
+.main-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    margin-top: 1.5rem;
+
+    padding: 0.5rem;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+}
+
+
+/* Navigation Links */
+
+.main-navigation a {
+    position: relative;
+
+    padding: 0.65rem 0.9rem;
+
+    border-radius: 0.7rem;
+
+    color: var(--nexus-grey);
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* Hover Effect */
+
+.main-navigation a:hover {
+    color: var(--nexus-white);
+
+    background: rgba(0, 217, 255, 0.08);
+
+    box-shadow:
+        0 0 18px rgba(0, 217, 255, 0.12),
+        inset 0 0 12px rgba(0, 217, 255, 0.05);
+
+    transform: translateY(-2px);
+}
+
+
+/* Small glowing line underneath */
+
+.main-navigation a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 4px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--nexus-cyan);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 8px var(--nexus-cyan);
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
+.main-navigation a:hover::after {
+    width: 55%;
+}
+
+
+/* ==============================
+   MOBILE HEADER
+   ============================== */
+
+@media (max-width: 768px) {
+
+    .site-header {
+        width: 94%;
+        padding: 1.25rem;
+    }
+
+    .logo-area {
+        flex-direction: column;
+        text-align: center;
+
+        gap: 0.5rem;
+    }
+
+    .logo-area img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .brand-text h1 {
+        font-size: 2rem;
+    }
+
+    .brand-text p {
+        font-size: 0.7rem;
+    }
+
+    .main-navigation {
+        margin-top: 1.25rem;
+        gap: 0.3rem;
+    }
+
+    .main-navigation a {
+        font-size: 0.7rem;
+        padding: 0.55rem 0.65rem;
+    }
+}
+```
+
+
 /* Main Content */
 main {
     width: 90%;

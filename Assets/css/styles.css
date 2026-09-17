@@ -532,7 +532,347 @@ img {
         saturate(1.1);
 }
 
+/* ==============================
+   ABOUT & WHAT WE OFFER
+   ============================== */
 
+.about-section {
+    padding: 2rem 0;
+}
+
+.about-content {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.section-label {
+    margin-bottom: 0.5rem;
+
+    color: var(--nexus-cyan);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: 0.2em;
+
+    text-transform: uppercase;
+}
+
+.about-content h2 {
+    margin-bottom: 1rem;
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==============================
+   WHAT WE OFFER
+   ============================== */
+
+.offers-section {
+    padding: 2rem 0;
+}
+
+.section-heading {
+    margin-bottom: 2rem;
+}
+
+.offers-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 1rem;
+}
+
+.offer-card {
+    min-height: 180px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(0, 255, 240, 0.45);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35),
+        0 0 25px rgba(0, 217, 255, 0.1);
+}
+
+.offer-card h3 {
+    margin-bottom: 0.75rem;
+
+    font-size: 1.2rem;
+}
+
+.offer-card p {
+    margin: 0;
+
+    font-size: 0.85rem;
+
+    line-height: 1.6;
+}
+
+
+/* ==============================
+   ABOUT & OFFER RESPONSIVE
+   ============================== */
+
+@media (max-width: 900px) {
+
+    .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-content {
+        padding: 1.5rem;
+    }
+}
+
+
+
+/* ==============================
+   FEATURED EXPERIENCES
+   ============================== */
+
+.experiences-section {
+    padding: 2rem 0;
+}
+
+.experiences-heading {
+    margin-bottom: 2.5rem;
+}
+
+
+/* Experience Grid */
+
+.experiences-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 1.5rem;
+}
+
+
+/* Experience Card */
+
+.experience-card {
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 1.25rem;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* Card Hover */
+
+.experience-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(0, 255, 240, 0.45);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(0, 217, 255, 0.12);
+}
+
+
+/* ==============================
+   EXPERIENCE IMAGE
+   ============================== */
+
+.experience-image {
+    position: relative;
+
+    height: 260px;
+
+    overflow: hidden;
+}
+
+.experience-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.6s ease,
+        filter 0.6s ease;
+}
+
+
+.experience-card:hover .experience-image img {
+    transform: scale(1.06);
+
+    filter:
+        brightness(1.08)
+        saturate(1.1);
+}
+
+
+/* Dark gradient over image */
+
+.experience-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(8, 8, 18, 0.8),
+            transparent 55%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Experience Number */
+
+.experience-number {
+    position: absolute;
+
+    top: 1rem;
+    right: 1rem;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    border-radius: 50%;
+
+    background: rgba(8, 8, 18, 0.6);
+
+    border: 1px solid rgba(0, 255, 240, 0.4);
+
+    color: var(--nexus-cyan);
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 0 15px rgba(0, 255, 240, 0.12);
+}
+
+
+/* ==============================
+   EXPERIENCE CONTENT
+   ============================== */
+
+.experience-content {
+    padding: 1.5rem;
+}
+
+
+.experience-type {
+    margin-bottom: 0.4rem;
+
+    color: var(--nexus-cyan);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+}
+
+
+.experience-content h3 {
+    margin-bottom: 0.75rem;
+
+    font-size: 1.5rem;
+}
+
+
+.experience-content > p:last-child {
+    margin: 0;
+
+    color: var(--nexus-grey);
+
+    font-size: 0.9rem;
+
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   EXPERIENCE RESPONSIVENESS
+   ============================== */
+
+@media (max-width: 900px) {
+
+    .experiences-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .experience-image {
+        height: 100%;
+        min-height: 250px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .experience-card {
+        display: block;
+    }
+
+    .experience-image {
+        height: 220px;
+    }
+
+}
 
 
 /* Main Content */

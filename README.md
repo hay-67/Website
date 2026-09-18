@@ -49,10 +49,10 @@ The website includes the following pages:
 | `index.html` | Homepage containing an introduction to NEON NEXUS and featured experiences. |
 | `about-us.html` | Provides information about NEON NEXUS and its purpose. |
 | `contact.html` | Provides contact and communication information. |
-| `Entertainment.html` | Displays the entertainment experiences available at NEON NEXUS. |
-| `Events.html` | Provides information about events and activities. |
-| `Gallery.html` | Displays images related to NEON NEXUS. |
-| `Membership.html` | Provides information about membership options. |
+| `entertainment.html` | Displays the entertainment experiences available at NEON NEXUS. |
+| `events.html` | Provides information about events and activities. |
+| `gallery.html` | Displays images related to NEON NEXUS. |
+| `membership.html` | Provides information about membership options. |
 | `NEXUSCafe.html` | Provides information about the NEXUS Cafe. |
 
 ---
@@ -86,10 +86,10 @@ POE/
     ├── Pages/
     │   ├── about-us.html
     │   ├── contact.html
-    │   ├── Entertainment.html
-    │   ├── Events.html
-    │   ├── Gallery.html
-    │   ├── Membership.html
+    │   ├── entertainment.html
+    │   ├── events.html
+    │   ├── gallery.html
+    │   ├── membership.html
     │   └── NEXUSCafe.html
     │
     ├── .gitattributes

@@ -332,13 +332,14 @@ W3Schools (n.d.) CSS Tutorial. Accessed: 8 September 2026. [Online.] Available a
 
 ### YouTube
 
-YouTube (14 March, 2022) Create this trendy blurry glass effect with CSS. Accessed: 18 September 2026. [Online video.] Available at: https://youtu.be/dsZ7RN9ItR4?si=5GQfWxBF1WxV85Qa
+YouTube (14 March, 2022) Create this trendy blurry glass effect with CSS. Accessed: 18 September 2026. [Online video]. Available at: https://youtu.be/dsZ7RN9ItR4?si=5GQfWxBF1WxV85Qa
 
-YouTube (11 June, 2025) CSS Glowing Button - How to Design Glowing Button with Hover Effects [Pure CSS]. Accessed: 18 September 2026. [Online video.] Available at: https://youtu.be/b_8fHNIHFk4?si=dqtU8IY-TLPM3Cxn
+YouTube (11 June, 2025) CSS Glowing Button - How to Design Glowing Button with Hover Effects [Pure CSS]. Accessed: 18 September 2026. [Online video]. Available at: https://youtu.be/b_8fHNIHFk4?si=dqtU8IY-TLPM3Cxn
 
-YouTube (8 September 2021) HTML & CSS Full Course - Beginner to Pro. Accessed: 18 September 2026. [Online video.] Available at: https://www.youtube.com/watch?v=wRNinF7YQqQ
+YouTube (8 September 2021) HTML & CSS Full Course - Beginner to Pro. Accessed: 18 September 2026. [Online video]. Available at: https://www.youtube.com/watch?v=wRNinF7YQqQ
 
-YouTube (30 August, 2022) CSS Tutorial - Full Course for Beginners. Accessed: 18 September 2026. [Online video.] Available at: https://youtu.be/OXGznpKZ_sA?si=d4L3tBFnHljmr_fg
+YouTube (30 August, 2022) CSS Tutorial - Full Course for Beginners. Accessed: 18 September 2026. [Online video]. Available at: https://youtu.be/OXGznpKZ_sA?si=d4L3tBFnHljmr_fg
 
-YouTube (17 October, 2024) Responsive Web Design Tutorial. Accessed: 18 September 2026. [Online video.] Available at: https://youtu.be/-G-zic_LS0A?si=slm2BjnW2o9-kiLh
+YouTube (17 October 2024) Responsive Web Design Tutorial. Accessed: 18 September 2026. [Online video]. Available at: https://youtu.be/-G-zic_L50A?si=slm2BjnW2o9-KiLh
+
 ---

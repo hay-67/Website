@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEON NEXUS | ENQUIRIES</title>
+
+    <link rel="stylesheet" href="../Assets/css/styles.css">
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="logo-area">
+
+        <img src="../Assets/Images/ChatGPT Image Aug 14, 2026, 12_57_40 PM.png"
+             alt="NEON NEXUS Logo"
+             width="150">
+
+        <div class="brand-text">
+
+            <h1>NEON NEXUS</h1>
+
+            <p>Entertainment • Creativity • Community</p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="main-navigation">
+
+        <a href="../index.html">HOME</a>
+        <a href="about-us.html">ABOUT US</a>
+        <a href="entertainment.html">ENTERTAINMENT</a>
+        <a href="events.html">EVENTS</a>
+        <a href="NEXUSCafe.html">NEXUS CAFE</a>
+        <a href="gallery.html">GALLERY</a>
+        <a href="membership.html">MEMBERSHIP</a>
+        <a href="enquiry.html">ENQUIRIES</a>
+        <a href="contact.html">CONTACT US</a>
+
+    </nav>
+
+</header>
+
+
+
+
+<main>
+
+    <!-- Enquiry Hero -->
+    <section class="page-hero contact-hero">
+        <div class="page-hero-content">
+
+            <p class="section-label">
+                ENQUIRIES / EXPLORE YOUR OPTIONS
+            </p>
+
+            <h2>
+                What Would You <span>Like to Know?</span>
+            </h2>
+
+            <p>
+                Interested in NEON NEXUS memberships, gaming,
+                events, creative spaces, volunteering or sponsorship?
+                Complete the form below and we will guide you.
+            </p>
+
+        </div>
+    </section>
+
+
+    <!-- Enquiry Form -->
+    <section class="contact-form-section">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                01 / ENQUIRY FORM
+            </p>
+
+            <h2>
+                Let's Find Your <span>Next Experience.</span>
+            </h2>
+
+            <p>
+                Tell us what you are interested in so we can
+                provide relevant information about your enquiry.
+            </p>
+
+        </div>
+
+
+        <div class="contact-form-panel">
+
+            <div class="form-terminal-header">
+
+                <div class="terminal-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <p>NEXUS_ENQUIRY_CHANNEL</p>
+
+                <span class="terminal-status">
+                    ONLINE
+                </span>
+
+            </div>
+
+
+            <form class="contact-form" id="enquiryForm">
+
+                <div class="form-group">
+
+                    <label for="enquiryName">FULL NAME</label>
+
+                    <input
+                        type="text"
+                        id="enquiryName"
+                        name="fullname"
+                        placeholder="Enter your full name"
+                        required
+                        minlength="2">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="enquiryEmail">EMAIL ADDRESS</label>
+
+                    <input
+                        type="email"
+                        id="enquiryEmail"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required>
+
+                </div>
+
+
+                <div class="form-group form-group-full">
+
+                    <label for="enquiryType">
+                        WHAT ARE YOU ENQUIRING ABOUT?
+                    </label>
+
+                    <select
+                        id="enquiryType"
+                        name="enquiryType"
+                        required>
+
+                        <option value="">Select an enquiry type</option>
+                        <option value="membership">Membership and pricing</option>
+                        <option value="gaming">Gaming facilities</option>
+                        <option value="events">Events and bookings</option>
+                        <option value="creative">Music and creative spaces</option>
+                        <option value="volunteering">Volunteering opportunities</option>
+                        <option value="sponsorship">Sponsorship opportunities</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group form-group-full">
+
+                    <label for="enquiryDetails">
+                        ENQUIRY DETAILS
+                    </label>
+
+                    <textarea
+                        id="enquiryDetails"
+                        name="details"
+                        rows="7"
+                        placeholder="Tell us what you would like to know..."
+                        required
+                        minlength="10"></textarea>
+
+                </div>
+
+
+                <button type="submit" class="contact-submit">
+                    SUBMIT ENQUIRY →
+                </button>
+
+            </form>
+
+
+            <!-- Enquiry response appears here -->
+            <div
+                id="enquiryResponse"
+                class="glass-panel"
+                role="status"
+                aria-live="polite"
+                hidden>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Enquiry Processing -->
+<script>
+
+    const enquiryForm = document.getElementById("enquiryForm");
+    const enquiryResponse = document.getElementById("enquiryResponse");
+
+    enquiryForm.addEventListener("submit", function(event) {
+
+        // Prevent the page from reloading
+        event.preventDefault();
+
+        // Get the user's selected enquiry type
+        const enquiryType =
+            document.getElementById("enquiryType").value;
+
+        let responseMessage = "";
+
+        // Display a response based on the enquiry
+        switch (enquiryType) {
+
+            case "membership":
+                responseMessage =
+                    "Thank you for your membership enquiry! " +
+                    "Please visit our Membership page to explore " +
+                    "available plans and pricing. Our team can help " +
+                    "with current availability and membership questions.";
+                break;
+
+            case "gaming":
+                responseMessage =
+                    "Thank you for your gaming enquiry! " +
+                    "Gaming facility availability may depend on the " +
+                    "date and time requested. Our team can help you " +
+                    "find out more about the available facilities.";
+                break;
+
+            case "events":
+                responseMessage =
+                    "Thank you for your event enquiry! " +
+                    "Booking availability depends on your requested " +
+                    "date and event requirements. Our team can discuss " +
+                    "the available options with you.";
+                break;
+
+            case "creative":
+                responseMessage =
+                    "Thank you for your creative space enquiry! " +
+                    "Our team can provide further information about " +
+                    "the music studio and creative facilities, " +
+                    "including availability and costs.";
+                break;
+
+            case "volunteering":
+                responseMessage =
+                    "Thank you for your interest in volunteering! " +
+                    "Our team can provide information about possible " +
+                    "volunteer roles and current opportunities.";
+                break;
+
+            case "sponsorship":
+                responseMessage =
+                    "Thank you for your sponsorship enquiry! " +
+                    "Our team can discuss potential sponsorship " +
+                    "opportunities and how you could support NEON NEXUS.";
+                break;
+
+        }
+
+        // Display the relevant response
+        enquiryResponse.textContent = responseMessage;
+        enquiryResponse.hidden = false;
+
+        // Bring the response into view
+        enquiryResponse.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    });
+
+</script>
+
+
+
+<!-- Footer -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <h2>
+                NEON NEXUS
+            </h2>
+
+            <p>
+                Entertainment, creativity and community in the heart
+                of Gqeberha.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>
+                EXPLORE
+            </h3>
+
+            <a href="../index.html">Home</a>
+
+            <a href="about-us.html">About Us</a>
+
+            <a href="entertainment.html">Entertainment</a>
+
+            <a href="events.html">Events</a>
+
+            <a href="gallery.html">Gallery</a>
+
+        </div>
+
+
+        <div class="footer-contact">
+
+            <h3>
+                CONNECT
+            </h3>
+
+            <p>
+                Email: info@neonnexus.co.za
+            </p>
+
+            <p>
+                Phone: (041) 123 4567
+            </p>
+
+            <p>
+                Gqeberha, South Africa
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            &copy; 2026 NEON NEXUS. All Rights Reserved.
+        </p>
+
+        <p>
+            ENTERTAINMENT • CREATIVITY • COMMUNITY
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

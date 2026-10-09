@@ -4,12 +4,151 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact NEON NEXUS in Gqeberha. Send the team a question, booking request, feedback or any other message.">
 
     <title>NEON NEXUS | CONTACT US</title>
 
     <link rel="stylesheet" href="../Assets/css/styles.css">
+
+    <!-- Contact page extras (works alongside styles.css) -->
+    <style>
+
+        :root {
+            --nn-accent: #00f0ff;   /* change this one colour to match your theme */
+            --nn-alert: #ff4d6d;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .form-group .field-error {
+            display: block;
+            min-height: 1.2em;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            color: var(--nn-alert);
+        }
+
+        .contact-form [aria-invalid="true"] {
+            border-color: var(--nn-alert) !important;
+            box-shadow: 0 0 0 1px var(--nn-alert);
+        }
+
+        .char-counter {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-align: right;
+            opacity: 0.7;
+        }
+
+        .form-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            opacity: 0.75;
+        }
+
+        /* Email preview card */
+        .email-result {
+            margin-top: 24px;
+            padding: 32px;
+            border: 1px solid var(--nn-accent);
+            border-radius: 12px;
+            box-shadow: 0 0 24px rgba(0, 240, 255, 0.18);
+        }
+
+        .email-result .result-ref {
+            margin: 0 0 8px;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            color: var(--nn-accent);
+        }
+
+        .email-result h3 {
+            margin: 0 0 12px;
+        }
+
+        .email-preview {
+            margin: 24px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .email-preview-header {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 8px 20px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .email-preview-header dt {
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            opacity: 0.7;
+        }
+
+        .email-preview-header dd {
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .email-preview-body {
+            margin: 0;
+            padding: 20px;
+            font-family: inherit;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .result-note {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        .result-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .result-actions button {
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .copy-feedback {
+            margin: 12px 0 0;
+            min-height: 1.2em;
+            font-size: 0.85rem;
+            color: var(--nn-accent);
+        }
+
+        @media (max-width: 600px) {
+            .email-result {
+                padding: 22px;
+            }
+
+            .email-preview-header {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .email-preview-header dd {
+                margin-bottom: 10px;
+            }
+        }
+
+    </style>
 
 </head>
 
@@ -45,7 +184,7 @@
         <a href="NEXUSCafe.html">NEXUS CAFE</a>
         <a href="gallery.html">GALLERY</a>
         <a href="membership.html">MEMBERSHIP</a>
-        <a href="enquiry.html" > ENQUIRIES</a>
+        <a href="enquiry.html">ENQUIRIES</a>
         <a href="contact.html">CONTACT US</a>
 
     </nav>
@@ -100,6 +239,8 @@
             <p>
                 Have questions about our facilities, memberships,
                 events, or services? Our team is ready to assist you.
+                Looking for prices or availability? Try our
+                <a href="enquiry.html">enquiry form</a> for an instant answer.
             </p>
 
         </div>
@@ -115,7 +256,7 @@
                     NEXUS CHANNEL
                 </span>
 
-                <p>
+                <p id="liveStatus">
                     CONNECTION AVAILABLE
                 </p>
 
@@ -162,7 +303,7 @@
                 </p>
 
                 <h3>
-                    info@neonnexus.co.za
+                    <a href="mailto:info@neonnexus.co.za">info@neonnexus.co.za</a>
                 </h3>
 
                 <p>
@@ -183,7 +324,7 @@
                 </p>
 
                 <h3>
-                    (041) 123 4567
+                    <a href="tel:+27411234567">(041) 123 4567</a>
                 </h3>
 
                 <p>
@@ -438,7 +579,7 @@
 
     <!-- Contact Form -->
 
-    <section class="contact-form-section">
+    <section class="contact-form-section" id="contact-form">
 
         <div class="section-heading">
 
@@ -451,8 +592,9 @@
             </h2>
 
             <p>
-                Complete the form below and a member of our team
-                will get back to you as soon as possible.
+                Complete the form below and we will turn it into an email
+                ready to send to our team. They will get back to you as
+                soon as possible.
             </p>
 
         </div>
@@ -475,72 +617,152 @@
                     NEXUS_COMMUNICATION_CHANNEL
                 </p>
 
-                <span class="terminal-status">
+                <span class="terminal-status" id="terminalStatus">
                     ONLINE
                 </span>
 
             </div>
 
 
-            <form class="contact-form">
+            <form class="contact-form" id="contactForm" novalidate>
 
 
                 <div class="form-group">
 
-                    <label for="fullname">
-                        FULL NAME
-                    </label>
+                    <label for="contactName">FULL NAME</label>
 
                     <input type="text"
-                           id="fullname"
+                           id="contactName"
                            name="fullname"
                            placeholder="Enter your full name"
-                           required>
+                           autocomplete="name"
+                           required
+                           minlength="2"
+                           maxlength="60"
+                           aria-describedby="contactNameError">
+
+                    <span class="field-error" id="contactNameError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group">
 
-                    <label for="email">
-                        EMAIL ADDRESS
-                    </label>
+                    <label for="contactEmail">EMAIL ADDRESS</label>
 
                     <input type="email"
-                           id="email"
+                           id="contactEmail"
                            name="email"
                            placeholder="Enter your email address"
-                           required>
+                           autocomplete="email"
+                           required
+                           maxlength="100"
+                           aria-describedby="contactEmailError">
+
+                    <span class="field-error" id="contactEmailError" role="alert"></span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="contactPhone">PHONE NUMBER</label>
+
+                    <input type="tel"
+                           id="contactPhone"
+                           name="phone"
+                           placeholder="e.g. 041 123 4567 or 082 123 4567"
+                           autocomplete="tel"
+                           required
+                           maxlength="20"
+                           aria-describedby="contactPhoneError">
+
+                    <span class="field-error" id="contactPhoneError" role="alert"></span>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="contactMethod">PREFERRED REPLY METHOD</label>
+
+                    <select id="contactMethod"
+                            name="method"
+                            required
+                            aria-describedby="contactMethodError">
+
+                        <option value="">Select a reply method</option>
+                        <option value="Email">Email</option>
+                        <option value="Phone call">Phone call</option>
+
+                    </select>
+
+                    <span class="field-error" id="contactMethodError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group form-group-full">
 
-                    <label for="subject">
-                        SUBJECT
-                    </label>
+                    <label for="contactType">TYPE OF MESSAGE</label>
+
+                    <select id="contactType"
+                            name="messageType"
+                            required
+                            aria-describedby="contactTypeError contactTypeHint">
+
+                        <option value="">Select a message type</option>
+                        <option value="General question">General question</option>
+                        <option value="Booking request">Booking request</option>
+                        <option value="Private event">Private event</option>
+                        <option value="Membership">Membership</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                    <span class="form-hint" id="contactTypeHint" hidden></span>
+
+                    <span class="field-error" id="contactTypeError" role="alert"></span>
+
+                </div>
+
+
+                <div class="form-group form-group-full">
+
+                    <label for="contactSubject">SUBJECT</label>
 
                     <input type="text"
-                           id="subject"
+                           id="contactSubject"
                            name="subject"
                            placeholder="What would you like to talk about?"
-                           required>
+                           required
+                           minlength="3"
+                           maxlength="80"
+                           aria-describedby="contactSubjectError">
+
+                    <span class="field-error" id="contactSubjectError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group form-group-full">
 
-                    <label for="message">
-                        MESSAGE
-                    </label>
+                    <label for="contactMessage">MESSAGE</label>
 
-                    <textarea id="message"
+                    <textarea id="contactMessage"
                               name="message"
                               rows="7"
                               placeholder="Type your message here..."
-                              required></textarea>
+                              required
+                              minlength="10"
+                              maxlength="1000"
+                              aria-describedby="contactMessageError contactMessageCount"></textarea>
+
+                    <span class="char-counter" id="contactMessageCount">0 / 1000</span>
+
+                    <span class="field-error" id="contactMessageError" role="alert"></span>
 
                 </div>
 
@@ -551,6 +773,16 @@
 
 
             </form>
+
+
+            <!-- Compiled email appears here -->
+            <div id="contactResponse"
+                 class="glass-panel email-result"
+                 role="status"
+                 aria-live="polite"
+                 tabindex="-1"
+                 hidden>
+            </div>
 
         </div>
 
@@ -672,6 +904,417 @@
 
 
 </main>
+
+
+
+<!-- Contact Form Processing -->
+<script>
+
+(function () {
+
+    "use strict";
+
+    /* ---------- The email recipient (change it here if needed) ---------- */
+
+    const RECIPIENT = "info@neonnexus.co.za";
+
+    /* ---------- Opening hours (from the Operating Hours section) ---------- */
+
+    // Indexed by Date.getDay(): 0 = Sunday ... 6 = Saturday
+    const HOURS = [
+        { name: "Sunday",    open: "10:00", close: "20:00" },
+        { name: "Monday",    open: "09:00", close: "22:00" },
+        { name: "Tuesday",   open: "09:00", close: "22:00" },
+        { name: "Wednesday", open: "09:00", close: "22:00" },
+        { name: "Thursday",  open: "09:00", close: "22:00" },
+        { name: "Friday",    open: "09:00", close: "23:00" },
+        { name: "Saturday",  open: "10:00", close: "23:00" }
+    ];
+
+    /* ---------- Helpful writing tips for each message type ---------- */
+
+    const TYPE_HINTS = {
+        "General question": "Tell us what you would like to know about NEON NEXUS.",
+        "Booking request": "Include the date, time, activity and number of people.",
+        "Private event": "Include the date, the type of event and the expected number of guests.",
+        "Membership": "Tell us which plan you are interested in, or what you would like to ask.",
+        "Feedback": "Let us know what you enjoyed and what we could improve.",
+        "Complaint": "Include what happened and when, so we can look into it properly.",
+        "Other": "Tell us what is on your mind."
+    };
+
+    /* ---------- Element references ---------- */
+
+    const form         = document.getElementById("contactForm");
+    const response     = document.getElementById("contactResponse");
+    const statusBadge  = document.getElementById("terminalStatus");
+    const liveStatus   = document.getElementById("liveStatus");
+
+    const nameInput    = document.getElementById("contactName");
+    const emailInput   = document.getElementById("contactEmail");
+    const phoneInput   = document.getElementById("contactPhone");
+    const methodSelect = document.getElementById("contactMethod");
+    const typeSelect   = document.getElementById("contactType");
+    const typeHint     = document.getElementById("contactTypeHint");
+    const subjectInput = document.getElementById("contactSubject");
+    const messageInput = document.getElementById("contactMessage");
+    const counter      = document.getElementById("contactMessageCount");
+
+    /* ---------- Small helpers ---------- */
+
+    function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) { node.className = className; }
+        if (text !== undefined) { node.textContent = text; }
+        return node;
+    }
+
+    function toMinutes(time) {
+        const parts = time.split(":");
+        return Number(parts[0]) * 60 + Number(parts[1]);
+    }
+
+    // Live status banner in the intro section (uses the visitor's clock)
+    function updateLiveStatus() {
+        const now = new Date();
+        const today = HOURS[now.getDay()];
+        const minutes = now.getHours() * 60 + now.getMinutes();
+
+        if (minutes >= toMinutes(today.open) && minutes < toMinutes(today.close)) {
+            liveStatus.textContent = "OPEN NOW / UNTIL " + today.close;
+        } else if (minutes < toMinutes(today.open)) {
+            liveStatus.textContent = "CLOSED / OPENS " + today.open;
+        } else {
+            const tomorrow = HOURS[(now.getDay() + 1) % 7];
+            liveStatus.textContent = "CLOSED / OPENS " + tomorrow.name.toUpperCase() + " " + tomorrow.open;
+        }
+    }
+
+    updateLiveStatus();
+
+    /* ---------- Validation ---------- */
+
+    const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const NAME_PATTERN  = /^[\p{L}][\p{L}\s'.-]*$/u;
+
+    // South African numbers: 0XXXXXXXXX, +27XXXXXXXXX or 0027XXXXXXXXX
+    // (spaces, dashes and brackets are allowed while typing)
+    const PHONE_PATTERN = /^(\+27|0027|0)\d{9}$/;
+
+    function setError(input, message) {
+        const error = document.getElementById(input.id + "Error");
+        error.textContent = message;
+        if (message) {
+            input.setAttribute("aria-invalid", "true");
+        } else {
+            input.removeAttribute("aria-invalid");
+        }
+        return message === "";
+    }
+
+    const validators = {
+
+        contactName: function () {
+            const value = nameInput.value.trim();
+            if (value.length < 2) {
+                return setError(nameInput, "Please enter your full name (at least 2 characters).");
+            }
+            if (!NAME_PATTERN.test(value)) {
+                return setError(nameInput, "Names can only contain letters, spaces, apostrophes, full stops and hyphens.");
+            }
+            return setError(nameInput, "");
+        },
+
+        contactEmail: function () {
+            const value = emailInput.value.trim();
+            if (value === "") {
+                return setError(emailInput, "Please enter your email address.");
+            }
+            if (!EMAIL_PATTERN.test(value)) {
+                return setError(emailInput, "Please enter a valid email address, for example name@example.com.");
+            }
+            return setError(emailInput, "");
+        },
+
+        contactPhone: function () {
+            const raw = phoneInput.value.trim();
+            if (raw === "") {
+                return setError(phoneInput, "Please enter your phone number.");
+            }
+            const cleaned = raw.replace(/[\s\-()]/g, "");
+            if (!PHONE_PATTERN.test(cleaned)) {
+                return setError(phoneInput, "Please enter a valid South African number, for example 041 123 4567 or +27 82 123 4567.");
+            }
+            return setError(phoneInput, "");
+        },
+
+        contactMethod: function () {
+            if (methodSelect.value === "") {
+                return setError(methodSelect, "Please choose how you would like us to reply.");
+            }
+            return setError(methodSelect, "");
+        },
+
+        contactType: function () {
+            if (typeSelect.value === "") {
+                return setError(typeSelect, "Please choose the type of message you are sending.");
+            }
+            return setError(typeSelect, "");
+        },
+
+        contactSubject: function () {
+            const value = subjectInput.value.trim();
+            if (value.length < 3) {
+                return setError(subjectInput, "Please enter a subject (at least 3 characters).");
+            }
+            return setError(subjectInput, "");
+        },
+
+        contactMessage: function () {
+            const value = messageInput.value.trim();
+            if (value.length < 10) {
+                return setError(messageInput, "Please write a little more (at least 10 characters).");
+            }
+            return setError(messageInput, "");
+        }
+    };
+
+    // Validate a field when the user leaves it, and re-check while they fix it
+    Object.keys(validators).forEach(function (id) {
+        const input = document.getElementById(id);
+
+        input.addEventListener("blur", validators[id]);
+
+        function recheck() {
+            if (input.getAttribute("aria-invalid") === "true") {
+                validators[id]();
+            }
+        }
+
+        input.addEventListener("input", recheck);
+        input.addEventListener("change", recheck);
+    });
+
+    /* ---------- Character counter and message type hint ---------- */
+
+    function updateCounter() {
+        counter.textContent = messageInput.value.length + " / 1000";
+    }
+
+    messageInput.addEventListener("input", updateCounter);
+
+    typeSelect.addEventListener("change", function () {
+        const hint = TYPE_HINTS[typeSelect.value];
+        if (hint) {
+            typeHint.textContent = "Tip: " + hint;
+            typeHint.hidden = false;
+        } else {
+            typeHint.hidden = true;
+        }
+    });
+
+    /* ---------- Compile the email ---------- */
+
+    function compileEmail(data, reference) {
+
+        const subject = "[" + data.type + "] " + data.subject + " (" + reference + ")";
+
+        const body =
+            "Hello NEON NEXUS team,\r\n\r\n" +
+            data.message + "\r\n\r\n" +
+            "----------------------------------------\r\n" +
+            "CONTACT DETAILS\r\n" +
+            "Name: " + data.name + "\r\n" +
+            "Email: " + data.email + "\r\n" +
+            "Phone: " + data.phone + "\r\n" +
+            "Preferred reply method: " + data.method + "\r\n" +
+            "Message type: " + data.type + "\r\n" +
+            "Reference: " + reference + "\r\n" +
+            "Sent from: NEON NEXUS website contact form\r\n" +
+            "----------------------------------------\r\n\r\n" +
+            "Kind regards,\r\n" +
+            data.name;
+
+        return { subject: subject, body: body };
+    }
+
+    function mailtoLink(mail) {
+        return "mailto:" + RECIPIENT +
+            "?subject=" + encodeURIComponent(mail.subject) +
+            "&body=" + encodeURIComponent(mail.body);
+    }
+
+    function webmailLink(mail) {
+        return "https://mail.google.com/mail/?view=cm&fs=1" +
+            "&to=" + encodeURIComponent(RECIPIENT) +
+            "&su=" + encodeURIComponent(mail.subject) +
+            "&body=" + encodeURIComponent(mail.body);
+    }
+
+    /* ---------- Show the email preview ---------- */
+
+    function showPreview(data, reference, mail) {
+
+        response.replaceChildren();
+
+        response.appendChild(el("p", "result-ref", "MESSAGE READY / REF " + reference));
+        response.appendChild(el("h3", "", "Your email is ready, " + data.name.split(/\s+/)[0] + "!"));
+        response.appendChild(el(
+            "p",
+            "",
+            "Check the email below. When you are happy with it, press SEND EMAIL " +
+            "to open it in your email app, addressed to " + RECIPIENT + "."
+        ));
+
+        // The email preview
+        const preview = el("div", "email-preview");
+
+        const header = el("dl", "email-preview-header");
+        [
+            ["To", RECIPIENT],
+            ["From", data.name + " <" + data.email + ">"],
+            ["Subject", mail.subject]
+        ].forEach(function (row) {
+            header.appendChild(el("dt", "", row[0].toUpperCase()));
+            header.appendChild(el("dd", "", row[1]));
+        });
+
+        preview.appendChild(header);
+        preview.appendChild(el("pre", "email-preview-body", mail.body.replace(/\r\n/g, "\n")));
+        response.appendChild(preview);
+
+        response.appendChild(el(
+            "p",
+            "result-note",
+            "Your message is only sent once you press send in your email app. " +
+            "Nothing has been sent yet. We will reply by " +
+            data.method.toLowerCase() + " as soon as possible."
+        ));
+
+        // Action buttons
+        const actions = el("div", "result-actions");
+
+        const send = el("a", "hero-button", "SEND EMAIL →");
+        send.href = mailtoLink(mail);
+        actions.appendChild(send);
+
+        const webmail = el("a", "secondary-button", "OPEN IN GMAIL");
+        webmail.href = webmailLink(mail);
+        webmail.target = "_blank";
+        webmail.rel = "noopener noreferrer";
+        actions.appendChild(webmail);
+
+        const copy = el("button", "secondary-button", "COPY EMAIL");
+        copy.type = "button";
+        actions.appendChild(copy);
+
+        const edit = el("button", "secondary-button", "EDIT MESSAGE");
+        edit.type = "button";
+        edit.addEventListener("click", editMessage);
+        actions.appendChild(edit);
+
+        const fresh = el("button", "secondary-button", "NEW MESSAGE");
+        fresh.type = "button";
+        fresh.addEventListener("click", resetForm);
+        actions.appendChild(fresh);
+
+        response.appendChild(actions);
+
+        const feedback = el("p", "copy-feedback");
+        feedback.setAttribute("aria-live", "polite");
+        response.appendChild(feedback);
+
+        copy.addEventListener("click", function () {
+            const text =
+                "To: " + RECIPIENT + "\n" +
+                "Subject: " + mail.subject + "\n\n" +
+                mail.body.replace(/\r\n/g, "\n");
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function () {
+                    feedback.textContent = "Email copied. You can paste it into any email app.";
+                }).catch(function () {
+                    feedback.textContent = "Could not copy automatically. Please select the text above and copy it.";
+                });
+            } else {
+                feedback.textContent = "Could not copy automatically. Please select the text above and copy it.";
+            }
+        });
+
+        response.hidden = false;
+    }
+
+    /* ---------- Edit / reset ---------- */
+
+    function editMessage() {
+        response.hidden = true;
+        response.replaceChildren();
+        form.hidden = false;
+        statusBadge.textContent = "ONLINE";
+        messageInput.focus();
+    }
+
+    function resetForm() {
+        form.reset();
+        typeHint.hidden = true;
+        updateCounter();
+
+        Object.keys(validators).forEach(function (id) {
+            setError(document.getElementById(id), "");
+        });
+
+        response.hidden = true;
+        response.replaceChildren();
+        form.hidden = false;
+        statusBadge.textContent = "ONLINE";
+        nameInput.focus();
+    }
+
+    /* ---------- Form submission ---------- */
+
+    form.addEventListener("submit", function (event) {
+
+        // Prevent the page from reloading
+        event.preventDefault();
+
+        // Run every validator (don't stop at the first failure)
+        const checks = Object.keys(validators).map(function (id) {
+            return { id: id, ok: validators[id]() };
+        });
+
+        const firstBad = checks.find(function (check) { return !check.ok; });
+
+        if (firstBad) {
+            document.getElementById(firstBad.id).focus();
+            return;
+        }
+
+        // All input is valid: compile the email
+        const data = {
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            phone: phoneInput.value.trim(),
+            method: methodSelect.value,
+            type: typeSelect.value,
+            subject: subjectInput.value.trim(),
+            message: messageInput.value.trim()
+        };
+
+        const reference = "NN-" + Date.now().toString(36).toUpperCase().slice(-6);
+        const mail = compileEmail(data, reference);
+
+        showPreview(data, reference, mail);
+
+        form.hidden = true;
+        statusBadge.textContent = "MESSAGE READY";
+
+        response.scrollIntoView({ behavior: "smooth", block: "start" });
+        response.focus({ preventScroll: true });
+    });
+
+})();
+
+</script>
 
 
 

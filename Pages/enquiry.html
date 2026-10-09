@@ -4,12 +4,145 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Enquire about NEON NEXUS memberships, gaming, events, creative spaces, volunteering and sponsorship in Gqeberha.">
 
     <title>NEON NEXUS | ENQUIRIES</title>
 
     <link rel="stylesheet" href="../Assets/css/styles.css">
+
+    <!-- Enquiry page extras (works alongside styles.css) -->
+    <style>
+
+        :root {
+            --nn-accent: #00f0ff;   /* change this one colour to match your theme */
+            --nn-alert: #ff4d6d;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .form-group .field-error {
+            display: block;
+            min-height: 1.2em;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            color: var(--nn-alert);
+        }
+
+        .contact-form [aria-invalid="true"] {
+            border-color: var(--nn-alert) !important;
+            box-shadow: 0 0 0 1px var(--nn-alert);
+        }
+
+        .char-counter {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-align: right;
+            opacity: 0.7;
+        }
+
+        .form-hint {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            opacity: 0.7;
+        }
+
+        /* Response card */
+        .enquiry-result {
+            margin-top: 24px;
+            padding: 32px;
+            border: 1px solid var(--nn-accent);
+            border-radius: 12px;
+            box-shadow: 0 0 24px rgba(0, 240, 255, 0.18);
+        }
+
+        .enquiry-result .result-ref {
+            margin: 0 0 8px;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
+            color: var(--nn-accent);
+        }
+
+        .enquiry-result h3 {
+            margin: 0 0 12px;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 10px 24px;
+            margin: 24px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .result-details dt {
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            opacity: 0.7;
+        }
+
+        .result-details dd {
+            margin: 0;
+        }
+
+        .result-list-title {
+            margin: 0 0 8px;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            color: var(--nn-accent);
+        }
+
+        .result-list {
+            margin: 0 0 24px;
+            padding-left: 20px;
+        }
+
+        .result-list li {
+            margin-bottom: 6px;
+        }
+
+        .result-note {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        .result-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .result-actions button {
+            cursor: pointer;
+            font: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .enquiry-result {
+                padding: 22px;
+            }
+
+            .result-details {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .result-details dd {
+                margin-bottom: 10px;
+            }
+        }
+
+    </style>
 
 </head>
 
@@ -54,7 +187,6 @@
 
 
 
-
 <main>
 
     <!-- Enquiry Hero -->
@@ -93,8 +225,9 @@
             </h2>
 
             <p>
-                Tell us what you are interested in so we can
-                provide relevant information about your enquiry.
+                Tell us what you are interested in and you will get
+                an instant answer with costs, opening hours and
+                availability for your enquiry.
             </p>
 
         </div>
@@ -112,14 +245,14 @@
 
                 <p>NEXUS_ENQUIRY_CHANNEL</p>
 
-                <span class="terminal-status">
+                <span class="terminal-status" id="terminalStatus">
                     ONLINE
                 </span>
 
             </div>
 
 
-            <form class="contact-form" id="enquiryForm">
+            <form class="contact-form" id="enquiryForm" novalidate>
 
                 <div class="form-group">
 
@@ -130,8 +263,13 @@
                         id="enquiryName"
                         name="fullname"
                         placeholder="Enter your full name"
+                        autocomplete="name"
                         required
-                        minlength="2">
+                        minlength="2"
+                        maxlength="60"
+                        aria-describedby="enquiryNameError">
+
+                    <span class="field-error" id="enquiryNameError" role="alert"></span>
 
                 </div>
 
@@ -145,7 +283,12 @@
                         id="enquiryEmail"
                         name="email"
                         placeholder="Enter your email address"
-                        required>
+                        autocomplete="email"
+                        required
+                        maxlength="100"
+                        aria-describedby="enquiryEmailError">
+
+                    <span class="field-error" id="enquiryEmailError" role="alert"></span>
 
                 </div>
 
@@ -159,7 +302,8 @@
                     <select
                         id="enquiryType"
                         name="enquiryType"
-                        required>
+                        required
+                        aria-describedby="enquiryTypeError">
 
                         <option value="">Select an enquiry type</option>
                         <option value="membership">Membership and pricing</option>
@@ -170,6 +314,26 @@
                         <option value="sponsorship">Sponsorship opportunities</option>
 
                     </select>
+
+                    <span class="field-error" id="enquiryTypeError" role="alert"></span>
+
+                </div>
+
+
+                <!-- Appears after an enquiry type is chosen; options change per type -->
+                <div class="form-group form-group-full" id="followUpGroup" hidden>
+
+                    <label for="enquiryFollowUp" id="followUpLabel">
+                        PLEASE CHOOSE
+                    </label>
+
+                    <select
+                        id="enquiryFollowUp"
+                        name="followUp"
+                        aria-describedby="enquiryFollowUpError">
+                    </select>
+
+                    <span class="field-error" id="enquiryFollowUpError" role="alert"></span>
 
                 </div>
 
@@ -186,7 +350,13 @@
                         rows="7"
                         placeholder="Tell us what you would like to know..."
                         required
-                        minlength="10"></textarea>
+                        minlength="10"
+                        maxlength="500"
+                        aria-describedby="enquiryDetailsError enquiryDetailsCount"></textarea>
+
+                    <span class="char-counter" id="enquiryDetailsCount">0 / 500</span>
+
+                    <span class="field-error" id="enquiryDetailsError" role="alert"></span>
 
                 </div>
 
@@ -201,9 +371,10 @@
             <!-- Enquiry response appears here -->
             <div
                 id="enquiryResponse"
-                class="glass-panel"
+                class="glass-panel enquiry-result"
                 role="status"
                 aria-live="polite"
+                tabindex="-1"
                 hidden>
             </div>
 
@@ -217,82 +388,589 @@
 <!-- Enquiry Processing -->
 <script>
 
-    const enquiryForm = document.getElementById("enquiryForm");
-    const enquiryResponse = document.getElementById("enquiryResponse");
+(function () {
 
-    enquiryForm.addEventListener("submit", function(event) {
+    "use strict";
+
+    /* ---------- Data taken from the NEON NEXUS website ---------- */
+
+    // Indexed by Date.getDay(): 0 = Sunday ... 6 = Saturday
+    const HOURS = [
+        { name: "Sunday",    open: "10:00", close: "20:00" },
+        { name: "Monday",    open: "09:00", close: "22:00" },
+        { name: "Tuesday",   open: "09:00", close: "22:00" },
+        { name: "Wednesday", open: "09:00", close: "22:00" },
+        { name: "Thursday",  open: "09:00", close: "22:00" },
+        { name: "Friday",    open: "09:00", close: "23:00" },
+        { name: "Saturday",  open: "10:00", close: "23:00" }
+    ];
+
+    const DAY_ORDER = [1, 2, 3, 4, 5, 6, 0];   // show Monday first
+
+    const PLANS = {
+        student: {
+            name: "Student Membership",
+            price: 99,
+            benefits: [
+                "Basic member benefits",
+                "Priority tournament registration",
+                "Community networking"
+            ]
+        },
+        premium: {
+            name: "Premium Membership",
+            price: 199,
+            benefits: [
+                "All member benefits",
+                "Event discounts",
+                "Special promotions",
+                "Early event access"
+            ]
+        },
+        vip: {
+            name: "VIP Membership",
+            price: 299,
+            benefits: [
+                "Premium benefits",
+                "Priority access",
+                "Event discounts",
+                "Exclusive opportunities"
+            ]
+        }
+    };
+
+    const TYPE_LABELS = {
+        membership:   "Membership and pricing",
+        gaming:       "Gaming facilities",
+        events:       "Events and bookings",
+        creative:     "Music and creative spaces",
+        volunteering: "Volunteering opportunities",
+        sponsorship:  "Sponsorship opportunities"
+    };
+
+    /* ---------- Follow-up question for each enquiry type ---------- */
+
+    const dayOptions = DAY_ORDER.map(function (d) {
+        return [String(d), HOURS[d].name];
+    });
+
+    const FOLLOW_UPS = {
+        membership: {
+            label: "WHICH PLAN INTERESTS YOU?",
+            options: [
+                ["student", "Student Membership: R99 / month"],
+                ["premium", "Premium Membership: R199 / month"],
+                ["vip", "VIP Membership: R299 / month"],
+                ["unsure", "Not sure yet: compare all plans"]
+            ]
+        },
+        gaming: {
+            label: "WHICH DAY WOULD YOU LIKE TO PLAY?",
+            options: dayOptions
+        },
+        events: {
+            label: "WHICH DAY SUITS YOU BEST?",
+            options: dayOptions
+        },
+        creative: {
+            label: "WHICH DAY WOULD YOU LIKE TO VISIT?",
+            options: dayOptions
+        },
+        volunteering: {
+            label: "WHEN ARE YOU AVAILABLE?",
+            options: [
+                ["weekdays", "Weekdays"],
+                ["weekends", "Weekends"],
+                ["evenings", "Evenings"],
+                ["flexible", "I am flexible"]
+            ]
+        },
+        sponsorship: {
+            label: "WHAT WOULD YOU LIKE TO SUPPORT?",
+            options: [
+                ["tournaments", "Gaming tournaments"],
+                ["events", "Community events"],
+                ["music", "Music studio"],
+                ["art", "Creative art space"],
+                ["general", "General sponsorship"]
+            ]
+        }
+    };
+
+    /* ---------- Element references ---------- */
+
+    const form          = document.getElementById("enquiryForm");
+    const response      = document.getElementById("enquiryResponse");
+    const statusBadge   = document.getElementById("terminalStatus");
+
+    const nameInput     = document.getElementById("enquiryName");
+    const emailInput    = document.getElementById("enquiryEmail");
+    const typeSelect    = document.getElementById("enquiryType");
+    const followGroup   = document.getElementById("followUpGroup");
+    const followLabel   = document.getElementById("followUpLabel");
+    const followSelect  = document.getElementById("enquiryFollowUp");
+    const detailsInput  = document.getElementById("enquiryDetails");
+    const counter       = document.getElementById("enquiryDetailsCount");
+
+    /* ---------- Small helpers ---------- */
+
+    function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) { node.className = className; }
+        if (text !== undefined) { node.textContent = text; }
+        return node;
+    }
+
+    function rand(amount) {
+        return "R" + amount.toLocaleString("en-ZA").replace(/\u00a0/g, " ");
+    }
+
+    function toMinutes(time) {
+        const parts = time.split(":");
+        return Number(parts[0]) * 60 + Number(parts[1]);
+    }
+
+    function hoursFor(dayIndex) {
+        const h = HOURS[dayIndex];
+        return h.open + " to " + h.close;
+    }
+
+    // Uses the visitor's own device clock
+    function openStatus() {
+        const now = new Date();
+        const today = HOURS[now.getDay()];
+        const minutes = now.getHours() * 60 + now.getMinutes();
+
+        if (minutes >= toMinutes(today.open) && minutes < toMinutes(today.close)) {
+            return "Open right now until " + today.close + ".";
+        }
+        if (minutes < toMinutes(today.open)) {
+            return "Closed right now. We open today at " + today.open + ".";
+        }
+        const tomorrow = HOURS[(now.getDay() + 1) % 7];
+        return "Closed right now. We open tomorrow (" + tomorrow.name + ") at " + tomorrow.open + ".";
+    }
+
+    /* ---------- Validation ---------- */
+
+    const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const NAME_PATTERN  = /^[\p{L}][\p{L}\s'.-]*$/u;
+
+    function setError(input, message) {
+        const error = document.getElementById(input.id + "Error");
+        error.textContent = message;
+        if (message) {
+            input.setAttribute("aria-invalid", "true");
+        } else {
+            input.removeAttribute("aria-invalid");
+        }
+        return message === "";
+    }
+
+    const validators = {
+
+        enquiryName: function () {
+            const value = nameInput.value.trim();
+            if (value.length < 2) {
+                return setError(nameInput, "Please enter your full name (at least 2 characters).");
+            }
+            if (!NAME_PATTERN.test(value)) {
+                return setError(nameInput, "Names can only contain letters, spaces, apostrophes, full stops and hyphens.");
+            }
+            return setError(nameInput, "");
+        },
+
+        enquiryEmail: function () {
+            const value = emailInput.value.trim();
+            if (value === "") {
+                return setError(emailInput, "Please enter your email address.");
+            }
+            if (!EMAIL_PATTERN.test(value)) {
+                return setError(emailInput, "Please enter a valid email address, for example name@example.com.");
+            }
+            return setError(emailInput, "");
+        },
+
+        enquiryType: function () {
+            if (typeSelect.value === "") {
+                return setError(typeSelect, "Please choose what you are enquiring about.");
+            }
+            return setError(typeSelect, "");
+        },
+
+        enquiryFollowUp: function () {
+            if (followGroup.hidden) { return true; }
+            if (followSelect.value === "") {
+                return setError(followSelect, "Please make a selection so we can tailor your answer.");
+            }
+            return setError(followSelect, "");
+        },
+
+        enquiryDetails: function () {
+            const value = detailsInput.value.trim();
+            if (value.length < 10) {
+                return setError(detailsInput, "Please give us a little more detail (at least 10 characters).");
+            }
+            return setError(detailsInput, "");
+        }
+    };
+
+    // Validate a field when the user leaves it, and re-check as they fix it
+    Object.keys(validators).forEach(function (id) {
+        const input = document.getElementById(id);
+        input.addEventListener("blur", validators[id]);
+        input.addEventListener("input", function () {
+            if (input.getAttribute("aria-invalid") === "true") {
+                validators[id]();
+            }
+        });
+        input.addEventListener("change", function () {
+            if (input.getAttribute("aria-invalid") === "true") {
+                validators[id]();
+            }
+        });
+    });
+
+    /* ---------- Character counter ---------- */
+
+    function updateCounter() {
+        counter.textContent = detailsInput.value.length + " / 500";
+    }
+
+    detailsInput.addEventListener("input", updateCounter);
+
+    /* ---------- Follow-up question changes with the enquiry type ---------- */
+
+    typeSelect.addEventListener("change", function () {
+
+        const config = FOLLOW_UPS[typeSelect.value];
+
+        followSelect.replaceChildren();
+        setError(followSelect, "");
+
+        if (!config) {
+            followGroup.hidden = true;
+            return;
+        }
+
+        followLabel.textContent = config.label;
+
+        const placeholder = el("option", "", "Please select");
+        placeholder.value = "";
+        followSelect.appendChild(placeholder);
+
+        config.options.forEach(function (pair) {
+            const option = el("option", "", pair[1]);
+            option.value = pair[0];
+            followSelect.appendChild(option);
+        });
+
+        followGroup.hidden = false;
+    });
+
+    /* ---------- Build the tailored response ---------- */
+
+    function buildResponse(type, choice) {
+
+        const result = {
+            headline: "",
+            intro: "",
+            details: [["Enquiry type", TYPE_LABELS[type]]],
+            listTitle: "",
+            list: [],
+            note: "",
+            links: []
+        };
+
+        const memberLink = { text: "VIEW MEMBERSHIP PLANS →", href: "membership.html" };
+        const contactLink = { text: "CONTACT THE TEAM", href: "contact.html" };
+
+        switch (type) {
+
+            case "membership": {
+
+                if (choice === "unsure") {
+
+                    result.headline = "Compare Our Membership Plans";
+                    result.intro = "Memberships are open for applications now. Here is what each plan costs:";
+
+                    Object.keys(PLANS).forEach(function (key) {
+                        const plan = PLANS[key];
+                        result.details.push([
+                            plan.name,
+                            rand(plan.price) + " per month (" + rand(plan.price * 12) + " over 12 months)"
+                        ]);
+                    });
+
+                    result.listTitle = "WHAT YOU GET WITH EVERY MEMBERSHIP";
+                    result.list = [
+                        "Community networking with gamers, creatives and performers",
+                        "Café discounts at NEXUS Café",
+                        "Access to member events and special promotions"
+                    ];
+
+                } else {
+
+                    const plan = PLANS[choice];
+
+                    result.headline = plan.name + ": " + rand(plan.price) + " per month";
+                    result.intro = "Great choice. Here is the cost breakdown and what is included:";
+
+                    result.details.push(["Monthly cost", rand(plan.price)]);
+                    result.details.push(["6 months", rand(plan.price * 6)]);
+                    result.details.push(["12 months", rand(plan.price * 12)]);
+                    result.details.push(["Availability", "Open for applications now"]);
+
+                    result.listTitle = "INCLUDED IN YOUR PLAN";
+                    result.list = plan.benefits;
+                }
+
+                result.note = "Totals are the monthly price multiplied by the number of months.";
+                result.links = [memberLink, contactLink];
+                break;
+            }
+
+            case "gaming": {
+
+                const day = Number(choice);
+
+                result.headline = "Gaming at The Grid";
+                result.intro = "Challenge your friends, compete in tournaments and enjoy multiplayer gaming in our dedicated gaming area.";
+
+                result.details.push(["Your chosen day", HOURS[day].name + ": " + hoursFor(day)]);
+                result.details.push(["Right now", openStatus()]);
+                result.details.push(["Session rates", "Confirmed by our team when you get in touch"]);
+
+                result.listTitle = "GOOD TO KNOW";
+                result.list = [
+                    "Members get priority tournament registration",
+                    "Premium and VIP members enjoy event discounts",
+                    "Bringing a group? Group bookings can be arranged through our contact team"
+                ];
+
+                result.links = [memberLink, contactLink];
+                break;
+            }
+
+            case "events": {
+
+                const day = Number(choice);
+
+                result.headline = "Events and Bookings";
+                result.intro = "NEON NEXUS hosts tournaments, competitions and community events, and we can host private events and gatherings too.";
+
+                result.details.push(["Your chosen day", HOURS[day].name + ": " + hoursFor(day)]);
+                result.details.push(["Right now", openStatus()]);
+                result.details.push(["Ticket and booking costs", "Listed per event on our Events page"]);
+
+                result.listTitle = "MEMBER ADVANTAGES";
+                result.list = [
+                    "Early access to selected event tickets and registrations",
+                    "Event discounts on Premium (R199) and VIP (R299) memberships",
+                    "Exclusive member-only events"
+                ];
+
+                result.links = [
+                    { text: "VIEW EVENTS →", href: "events.html" },
+                    contactLink
+                ];
+                break;
+            }
+
+            case "creative": {
+
+                const day = Number(choice);
+
+                result.headline = "Music HQ and Canvas District";
+                result.intro = "Practise, create and record in our fully equipped music studio, or express yourself through art in the Canvas District.";
+
+                result.details.push(["Your chosen day", HOURS[day].name + ": " + hoursFor(day)]);
+                result.details.push(["Right now", openStatus()]);
+                result.details.push(["Session rates", "Confirmed by our team when you book"]);
+
+                result.listTitle = "WHAT YOU CAN DO";
+                result.list = [
+                    "Practise, create and record music in the studio spaces",
+                    "Draw, paint and collaborate on our community graffiti wall",
+                    "Join live music events and creative community sessions"
+                ];
+
+                result.links = [
+                    { text: "EXPLORE ENTERTAINMENT →", href: "entertainment.html" },
+                    contactLink
+                ];
+                break;
+            }
+
+            case "volunteering": {
+
+                const availability = {
+                    weekdays: "Weekdays",
+                    weekends: "Weekends",
+                    evenings: "Evenings",
+                    flexible: "Flexible"
+                };
+
+                result.headline = "Volunteer With NEON NEXUS";
+                result.intro = "Thank you for wanting to support our community. Volunteers help us keep NEON NEXUS a safe, welcoming space for teens and young adults.";
+
+                result.details.push(["Your availability", availability[choice]]);
+                result.details.push(["Opening hours", "Weekdays 09:00 to 22:00, Saturday 10:00 to 23:00, Sunday 10:00 to 20:00"]);
+                result.details.push(["Current openings", "Roles are confirmed by our team"]);
+
+                result.note = "Mention any skills or experience you have in your enquiry details so we can match you to the right role.";
+                result.links = [
+                    { text: "ABOUT NEON NEXUS →", href: "about-us.html" },
+                    contactLink
+                ];
+                break;
+            }
+
+            case "sponsorship": {
+
+                const interest = {
+                    tournaments: "Gaming tournaments",
+                    events: "Community events",
+                    music: "Music studio",
+                    art: "Creative art space",
+                    general: "General sponsorship"
+                };
+
+                result.headline = "Sponsor NEON NEXUS";
+                result.intro = "Thank you for your interest in supporting young people in Gqeberha. Sponsors help us run tournaments, events and creative spaces.";
+
+                result.details.push(["Area of interest", interest[choice]]);
+                result.details.push(["Sponsorship packages", "Tailored to your interest and confirmed by our team"]);
+
+                result.note = "To discuss packages and availability, contact us at info@neonnexus.co.za or (041) 123 4567.";
+                result.links = [
+                    { text: "VIEW EVENTS →", href: "events.html" },
+                    contactLink
+                ];
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    /* ---------- Show the response on the page ---------- */
+
+    function showResponse(firstName, reference, result, details) {
+
+        response.replaceChildren();
+
+        response.appendChild(el("p", "result-ref", "ENQUIRY RECEIVED / REF " + reference));
+        response.appendChild(el("h3", "", result.headline));
+        response.appendChild(el("p", "", "Thank you, " + firstName + "! " + result.intro));
+
+        // Summary of what was submitted + answer details
+        const list = el("dl", "result-details");
+
+        const rows = result.details.slice();
+        rows.push(["Your message", details]);
+        rows.push(["Submitted", new Date().toLocaleString("en-ZA")]);
+
+        rows.forEach(function (row) {
+            list.appendChild(el("dt", "", row[0].toUpperCase()));
+            list.appendChild(el("dd", "", row[1]));
+        });
+
+        response.appendChild(list);
+
+        if (result.list.length > 0) {
+            response.appendChild(el("p", "result-list-title", result.listTitle));
+            const bullets = el("ul", "result-list");
+            result.list.forEach(function (item) {
+                bullets.appendChild(el("li", "", item));
+            });
+            response.appendChild(bullets);
+        }
+
+        if (result.note) {
+            response.appendChild(el("p", "result-note", result.note));
+        }
+
+        response.appendChild(el(
+            "p",
+            "result-note",
+            "Quote reference " + reference + " if you contact us about this enquiry."
+        ));
+
+        const actions = el("div", "result-actions");
+
+        result.links.forEach(function (link, index) {
+            const anchor = el("a", index === 0 ? "hero-button" : "secondary-button", link.text);
+            anchor.href = link.href;
+            actions.appendChild(anchor);
+        });
+
+        const again = el("button", "secondary-button", "NEW ENQUIRY");
+        again.type = "button";
+        again.addEventListener("click", resetEnquiry);
+        actions.appendChild(again);
+
+        response.appendChild(actions);
+        response.hidden = false;
+    }
+
+    function resetEnquiry() {
+        form.reset();
+        followGroup.hidden = true;
+        followSelect.replaceChildren();
+        updateCounter();
+
+        Object.keys(validators).forEach(function (id) {
+            setError(document.getElementById(id), "");
+        });
+
+        response.hidden = true;
+        response.replaceChildren();
+        form.hidden = false;
+        statusBadge.textContent = "ONLINE";
+        nameInput.focus();
+    }
+
+    /* ---------- Form submission ---------- */
+
+    form.addEventListener("submit", function (event) {
 
         // Prevent the page from reloading
         event.preventDefault();
 
-        // Get the user's selected enquiry type
-        const enquiryType =
-            document.getElementById("enquiryType").value;
-
-        let responseMessage = "";
-
-        // Display a response based on the enquiry
-        switch (enquiryType) {
-
-            case "membership":
-                responseMessage =
-                    "Thank you for your membership enquiry! " +
-                    "Please visit our Membership page to explore " +
-                    "available plans and pricing. Our team can help " +
-                    "with current availability and membership questions.";
-                break;
-
-            case "gaming":
-                responseMessage =
-                    "Thank you for your gaming enquiry! " +
-                    "Gaming facility availability may depend on the " +
-                    "date and time requested. Our team can help you " +
-                    "find out more about the available facilities.";
-                break;
-
-            case "events":
-                responseMessage =
-                    "Thank you for your event enquiry! " +
-                    "Booking availability depends on your requested " +
-                    "date and event requirements. Our team can discuss " +
-                    "the available options with you.";
-                break;
-
-            case "creative":
-                responseMessage =
-                    "Thank you for your creative space enquiry! " +
-                    "Our team can provide further information about " +
-                    "the music studio and creative facilities, " +
-                    "including availability and costs.";
-                break;
-
-            case "volunteering":
-                responseMessage =
-                    "Thank you for your interest in volunteering! " +
-                    "Our team can provide information about possible " +
-                    "volunteer roles and current opportunities.";
-                break;
-
-            case "sponsorship":
-                responseMessage =
-                    "Thank you for your sponsorship enquiry! " +
-                    "Our team can discuss potential sponsorship " +
-                    "opportunities and how you could support NEON NEXUS.";
-                break;
-
-        }
-
-        // Display the relevant response
-        enquiryResponse.textContent = responseMessage;
-        enquiryResponse.hidden = false;
-
-        // Bring the response into view
-        enquiryResponse.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest"
+        // Run every validator (don't stop at the first failure)
+        const checks = Object.keys(validators).map(function (id) {
+            return { id: id, ok: validators[id]() };
         });
 
+        const firstBad = checks.find(function (check) { return !check.ok; });
+
+        if (firstBad) {
+            document.getElementById(firstBad.id).focus();
+            return;
+        }
+
+        // All input is valid: process the enquiry
+        const fullName = nameInput.value.trim();
+        const firstName = fullName.split(/\s+/)[0];
+        const type = typeSelect.value;
+        const choice = followSelect.value;
+        const message = detailsInput.value.trim();
+
+        const reference = "NN-" + Date.now().toString(36).toUpperCase().slice(-6);
+
+        const result = buildResponse(type, choice);
+
+        showResponse(firstName, reference, result, message);
+
+        form.hidden = true;
+        statusBadge.textContent = "RESPONSE READY";
+
+        response.scrollIntoView({ behavior: "smooth", block: "start" });
+        response.focus({ preventScroll: true });
     });
+
+})();
 
 </script>
 

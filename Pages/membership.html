@@ -4,10 +4,16 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NEON NEXUS | MEMBERSHIP</title>
+    <title>Membership Plans | Student, Premium & VIP</title>
+    <meta name="description" content="Join NEON NEXUS from R99 per month. Compare Student, Premium and VIP memberships and register online.">
+    <meta name="keywords" content="NEON NEXUS membership, student membership, premium membership, VIP membership, youth club Gqeberha, member benefits">
+
+    <meta property="og:title" content="Membership Plans | Student, Premium & VIP">
+    <meta property="og:description" content="Student R99, Premium R199 and VIP R299 per month. Unlock priority events, café discounts and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hay-67.github.io/Website/Pages/membership.html">
 
     <link rel="stylesheet" href="../Assets/css/styles.css">
 
@@ -21,9 +27,9 @@
 
     <div class="logo-area">
 
-        <img src="../Assets/Images/ChatGPT Image Aug 14, 2026, 12_57_40 PM.png"
-             alt="NEON NEXUS Logo"
-             width="150">
+        <img src="../Assets/Images/neon-nexus-logo.png"
+            alt="NEON NEXUS entertainment and creative hub logo"
+            width="150">
 
         <div class="brand-text">
 
@@ -72,8 +78,8 @@
             </h2>
 
             <p>
-                Become part of the NEON NEXUS community and unlock
-                exclusive benefits, events, rewards, and opportunities.
+                Join NEON NEXUS from R99 per month. 
+                Compare Student, Premium and VIP memberships and register online.
             </p>
 
         </div>
@@ -604,95 +610,97 @@
             </div>
 
 
-            <form class="membership-form">
+            <form class="membership-form" id="membershipForm" novalidate>
 
 
                 <div class="form-group">
 
-                    <label for="fullname">
-                        FULL NAME
-                    </label>
+                    <label for="fullname">FULL NAME</label>
 
                     <input type="text"
                            id="fullname"
                            name="fullname"
                            placeholder="Enter your full name"
-                           required>
+                           autocomplete="name"
+                           required
+                           minlength="2"
+                           maxlength="60"
+                           aria-describedby="fullnameError">
+
+                    <span class="field-error" id="fullnameError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group">
 
-                    <label for="email">
-                        EMAIL ADDRESS
-                    </label>
+                    <label for="email">EMAIL ADDRESS</label>
 
                     <input type="email"
                            id="email"
                            name="email"
                            placeholder="Enter your email address"
-                           required>
+                           autocomplete="email"
+                           required
+                           maxlength="100"
+                           aria-describedby="emailError">
+
+                    <span class="field-error" id="emailError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group">
 
-                    <label for="phone">
-                        PHONE NUMBER
-                    </label>
+                    <label for="phone">PHONE NUMBER</label>
 
                     <input type="tel"
                            id="phone"
                            name="phone"
-                           placeholder="Enter your phone number"
-                           required>
+                           placeholder="e.g. 041 123 4567 or 082 123 4567"
+                           autocomplete="tel"
+                           required
+                           maxlength="20"
+                           aria-describedby="phoneError">
+
+                    <span class="field-error" id="phoneError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group">
 
-                    <label for="membership-type">
-                        SELECT MEMBERSHIP
-                    </label>
+                    <label for="membership-type">SELECT MEMBERSHIP</label>
 
                     <select id="membership-type"
                             name="membership-type"
-                            required>
+                            required
+                            aria-describedby="membership-typeError">
 
-                        <option value="">
-                            Select a membership
-                        </option>
-
-                        <option value="student">
-                            Student Membership — R99
-                        </option>
-
-                        <option value="premium">
-                            Premium Membership — R199
-                        </option>
-
-                        <option value="vip">
-                            VIP Membership — R299
-                        </option>
+                        <option value="">Select a membership</option>
+                        <option value="student">Student Membership — R99</option>
+                        <option value="premium">Premium Membership — R199</option>
+                        <option value="vip">VIP Membership — R299</option>
 
                     </select>
+
+                    <span class="field-error" id="membership-typeError" role="alert"></span>
 
                 </div>
 
 
                 <div class="form-group form-group-full">
 
-                    <label for="comments">
-                        ADDITIONAL COMMENTS
-                    </label>
+                    <label for="comments">ADDITIONAL COMMENTS</label>
 
                     <textarea id="comments"
                               name="comments"
                               rows="5"
-                              placeholder="Anything else you would like us to know?"></textarea>
+                              maxlength="300"
+                              placeholder="Anything else you would like us to know? (optional)"
+                              aria-describedby="commentsError"></textarea>
+
+                    <span class="field-error" id="commentsError" role="alert"></span>
 
                 </div>
 
@@ -704,6 +712,15 @@
 
             </form>
 
+        </div>
+
+        <!-- Confirmation appears here after a valid application -->
+        <div id="membershipResult"
+             class="glass-panel membership-result"
+             role="status"
+             aria-live="polite"
+             tabindex="-1"
+             hidden>
         </div>
 
     </section>
@@ -873,6 +890,8 @@
 
             <a href="entertainment.html">Entertainment</a>
 
+            <a href="membership.html">Membership</a>
+
             <a href="events.html">Events</a>
 
             <a href="gallery.html">Gallery</a>
@@ -886,9 +905,7 @@
                 CONNECT
             </h3>
 
-            <p>
-                Email: info@neonnexus.co.za
-            </p>
+            <p>Email: <a href="mailto:info@neonnexus.co.za">info@neonnexus.co.za</a></p>
 
             <p>
                 Phone: 041 123 4567
@@ -918,6 +935,7 @@
 
 </footer>
 
+<script src="../Assets/js/membership-form.js"></script>
 
 </body>
 

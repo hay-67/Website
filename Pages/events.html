@@ -4,10 +4,16 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NEON NEXUS | EVENTS & TOURNAMENTS</title>
+    <title>Events & Tournaments | NEON NEXUS Gqeberha</title>
+    <meta name="description" content="Search upcoming esports tournaments, open mic nights, art workshops and live music at NEON NEXUS in Gqeberha.">
+    <meta name="keywords" content="esports tournament, open mic night, art workshop, live music, youth events, Gqeberha events, NEON NEXUS">
+
+    <meta property="og:title" content="Events & Tournaments | NEON NEXUS Gqeberha">
+    <meta property="og:description" content="Esports tournaments, open mic nights, art workshops and live music in Gqeberha.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hay-67.github.io/Website/Pages/events.html">
 
     <link rel="stylesheet" href="../Assets/css/styles.css">
 
@@ -23,9 +29,9 @@
         <!-- Company Logo and Name -->
         <div class="logo-area">
 
-            <img src="../Assets/Images/ChatGPT Image Aug 14, 2026, 12_57_40 PM.png"
-                 alt="NEON NEXUS Logo"
-                 width="150">
+            <img src="../Assets/Images/neon-nexus-logo.png"
+                alt="NEON NEXUS entertainment and creative hub logo"
+                width="150">
 
             <div class="brand-text">
 
@@ -81,9 +87,8 @@
                 </h2>
 
                 <p>
-                    From competitive tournaments and live performances
-                    to creative workshops and community events, there is
-                    always something happening at NEON NEXUS.
+                    Search upcoming esports tournaments, open mic nights, 
+                    art workshops and live music at NEON NEXUS in Gqeberha.
                 </p>
 
             </div>
@@ -169,114 +174,51 @@
             </div>
 
 
-            <div class="event-grid">
+            <!-- Search and filter controls -->
+            <div class="event-controls" role="search" aria-label="Search and filter events">
 
+                <div class="event-field">
+                    <label for="eventSearch">SEARCH EVENTS</label>
+                    <input type="search" id="eventSearch" placeholder="Search by name, type or venue" autocomplete="off">
+                </div>
 
-                <!-- Esports Championship -->
-                <article class="event-card">
+                <div class="event-field">
+                    <label for="eventCategory">CATEGORY</label>
+                    <select id="eventCategory">
+                        <option value="all">All categories</option>
+                    </select>
+                </div>
 
-                    <div class="event-date">
-
-                        <span>25</span>
-
-                        <small>SEP</small>
-
-                    </div>
-
-                    <div class="event-info">
-
-                        <p class="event-type">GAMING</p>
-
-                        <h3>Esports Championship</h3>
-
-                        <p>14:00 • The Arena</p>
-
-                    </div>
-
-                    <span class="event-status">UPCOMING</span>
-
-                </article>
-
-
-                <!-- Open Mic -->
-                <article class="event-card">
-
-                    <div class="event-date">
-
-                        <span>30</span>
-
-                        <small>SEP</small>
-
-                    </div>
-
-                    <div class="event-info">
-
-                        <p class="event-type">LIVE PERFORMANCE</p>
-
-                        <h3>Open Mic Night</h3>
-
-                        <p>18:00 • The Arena</p>
-
-                    </div>
-
-                    <span class="event-status">UPCOMING</span>
-
-                </article>
-
-
-                <!-- Art Workshop -->
-                <article class="event-card">
-
-                    <div class="event-date">
-
-                        <span>05</span>
-
-                        <small>OCT</small>
-
-                    </div>
-
-                    <div class="event-info">
-
-                        <p class="event-type">CREATIVE</p>
-
-                        <h3>Community Art Workshop</h3>
-
-                        <p>16:00 • Art District</p>
-
-                    </div>
-
-                    <span class="event-status">UPCOMING</span>
-
-                </article>
-
-
-                <!-- Music Showcase -->
-                <article class="event-card">
-
-                    <div class="event-date">
-
-                        <span>30</span>
-
-                        <small>SEP</small>
-
-                    </div>
-
-                    <div class="event-info">
-
-                        <p class="event-type">MUSIC</p>
-
-                        <h3>Live Music Showcase</h3>
-
-                        <p>19:00 • The Arena</p>
-
-                    </div>
-
-                    <span class="event-status">UPCOMING</span>
-
-                </article>
-
+                <div class="event-field">
+                    <label for="eventSort">SORT BY</label>
+                    <select id="eventSort">
+                        <option value="soonest">Soonest first</option>
+                        <option value="latest">Latest first</option>
+                        <option value="title">Name (A to Z)</option>
+                    </select>
+                </div>
 
             </div>
+
+            <div class="event-toolbar">
+                <p class="event-count" id="eventCount" aria-live="polite"></p>
+
+                <label class="event-switch">
+                    <input type="checkbox" id="eventPast">
+                    Show past events
+                </label>
+
+                <button type="button" class="secondary-button event-clear" id="eventClear" hidden>
+                    CLEAR FILTERS
+                </button>
+            </div>
+
+            <!-- Event cards are built from Assets/data/events.json by events.js -->
+            <div class="event-grid" id="eventList"></div>
+
+            <noscript>
+                <p>Please turn on JavaScript to see the event list, or contact us for upcoming dates.</p>
+            </noscript>
 
         </section>
 
@@ -500,7 +442,484 @@
 
                 <h3>CONNECT</h3>
 
-                <p>Email: info@neonnexus.co.za</p>
+                <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Entertainment | Gaming, Music Studio & Art Spaces</title>
+    <meta name="description" content="Explore gaming at The Grid, Music HQ and the Art District, our entertainment spaces at NEON NEXUS in Gqeberha.">
+    <meta name="keywords" content="gaming lounge, music studio, art space, multiplayer gaming, darts and billiards, creative spaces, Gqeberha">
+
+    <meta property="og:title" content="Entertainment | Gaming, Music Studio & Art Spaces">
+    <meta property="og:description" content="Gaming, a music studio, an art space and a chill lounge under one roof in Gqeberha.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hay-67.github.io/Website/Pages/entertainment.html">
+
+    <link rel="stylesheet" href="../Assets/css/styles.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Website Header -->
+    <header class="site-header">
+
+        <!-- Company Logo and Name -->
+        <div class="logo-area">
+
+            <img src="../Assets/Images/neon-nexus-logo.png"
+                 alt="NEON NEXUS entertainment and creative hub logo"
+                 width="150">
+
+            <div class="brand-text">
+
+                <h1>NEON NEXUS</h1>
+
+                <p>Entertainment • Creativity • Community</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Navigation -->
+        <nav class="main-navigation">
+
+            <a href="../index.html">HOME</a>
+
+            <a href="about-us.html">ABOUT US</a>
+
+            <a href="entertainment.html">ENTERTAINMENT</a>
+
+            <a href="events.html">EVENTS</a>
+
+            <a href="NEXUSCafe.html">NEXUS CAFE</a>
+
+            <a href="gallery.html">GALLERY</a>
+
+            <a href="membership.html">MEMBERSHIP</a>
+
+            <a href="enquiry.html" > ENQUIRIES</a>
+
+            <a href="contact.html">CONTACT US</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+
+
+        <!-- Entertainment Hero -->
+        <section class="page-hero entertainment-hero">
+
+            <div class="page-hero-content">
+
+                <p class="section-label">ENTERTAINMENT / THE NEXUS</p>
+
+                <h2>
+                    Find Your
+                    <span>Space.</span>
+                </h2>
+
+                <p>
+                    Explore gaming at The Grid, 
+                    Music HQ and the Canvas District, our entertainment spaces at NEON NEXUS in Gqeberha.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Introduction -->
+        <section class="entertainment-intro">
+
+            <div class="section-heading">
+
+                <p class="section-label">01 / EXPLORE</p>
+
+                <h2>Something For Everyone</h2>
+
+                <p>
+                    Whether you want to compete, create, socialise, study,
+                    or simply spend time with friends, our entertainment
+                    spaces are designed to give you somewhere to belong.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Entertainment Areas -->
+        <section class="entertainment-areas">
+
+
+            <!-- The Grid -->
+            <article class="entertainment-card">
+
+                <div class="entertainment-image">
+
+                    <img src="../Assets/Images/neon-nexus-gaming-grid.png"
+                         alt="The Grid gaming area">
+
+                    <span class="entertainment-number">02</span>
+
+                </div>
+
+                <div class="entertainment-content">
+
+                    <p class="section-label">GAMING ZONE</p>
+
+                    <h2>The Grid</h2>
+
+                    <p>
+                        Step into our Gaming Zone and enjoy a wide range
+                        of console gaming experiences. Challenge friends,
+                        join tournaments, and meet fellow gamers in a
+                        welcoming environment.
+                    </p>
+
+                    <h3>FEATURES</h3>
+
+                    <ul>
+
+                        <li>Console Gaming Stations</li>
+
+                        <li>Multiplayer Gaming Sessions</li>
+
+                        <li>Esports Competitions</li>
+
+                        <li>Gaming Events and Tournaments</li>
+
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Music HQ -->
+            <article class="entertainment-card reverse">
+
+                <div class="entertainment-image">
+
+                    <img src="../Assets/Images/neon-nexus-music-studio.jpg"
+                         alt="Music HQ recording studio">
+
+                    <span class="entertainment-number">03</span>
+
+                </div>
+
+                <div class="entertainment-content">
+
+                    <p class="section-label">MUSIC STUDIO</p>
+
+                    <h2>Music HQ</h2>
+
+                    <p>
+                        Musicians, singers, and producers can develop their
+                        skills in our music practice and recording studios.
+                        These creative spaces encourage collaboration and
+                        artistic growth.
+                    </p>
+
+                    <h3>ACTIVITIES</h3>
+
+                    <ul>
+
+                        <li>Music Practice Sessions</li>
+
+                        <li>Song Recording</li>
+
+                        <li>Collaborative Projects</li>
+
+                        <li>Creative Workshops</li>
+
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- Art District -->
+            <article class="entertainment-card">
+
+                <div class="entertainment-image">
+
+                    <img src="../Assets/Images/neon-nexus-art-district.webp"
+                         alt="Art District creative space">
+
+                    <span class="entertainment-number">04</span>
+
+                </div>
+
+                <div class="entertainment-content">
+
+                    <p class="section-label">CREATIVE ART SPACE</p>
+
+                    <h2>Art District</h2>
+
+                    <p>
+                        Express your creativity through painting, drawing,
+                        sketching, and collaborative art projects in a space
+                        designed to let your imagination run freely.
+                    </p>
+
+                    <h3>HIGHLIGHTS</h3>
+
+                    <ul>
+
+                        <li>Community Graffiti Wall</li>
+
+                        <li>Art Supplies Available</li>
+
+                        <li>Art Exhibitions</li>
+
+                        <li>Creative Workshops</li>
+
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- The DnB -->
+            <article class="entertainment-card reverse">
+
+                <div class="entertainment-image">
+
+                    <img src="../Assets/Images/neon-nexus-darts-n-billiards.jpg"
+                         alt="Darts and billiards recreation area">
+
+                    <span class="entertainment-number">05</span>
+
+                </div>
+
+                <div class="entertainment-content">
+
+                    <p class="section-label">RECREATION ZONE</p>
+
+                    <h2>The DnB</h2>
+
+                    <p>
+                        Take a break and enjoy a variety of recreational
+                        activities with friends in a relaxed and social
+                        environment.
+                    </p>
+
+                    <h3>AVAILABLE ACTIVITIES</h3>
+
+                    <ol>
+
+                        <li>Billiards</li>
+
+                        <li>Darts</li>
+
+                        <li>Board Games</li>
+
+                        <li>Social Challenges</li>
+
+                    </ol>
+
+                </div>
+
+            </article>
+
+
+            <!-- NEXUS n Chill -->
+            <article class="entertainment-card">
+
+                <div class="entertainment-image">
+
+                    <img src="../Assets/Images/neon-nexus-lounge.webp"
+                         alt="NEXUS n Chill lounge area">
+
+                    <span class="entertainment-number">06</span>
+
+                </div>
+
+                <div class="entertainment-content">
+
+                    <p class="section-label">LOUNGE</p>
+
+                    <h2>NEXUS n Chill</h2>
+
+                    <p>
+                        Need a quiet space to study or relax? Our lounge
+                        provides comfortable seating, a calm atmosphere,
+                        and opportunities to connect with others.
+                    </p>
+
+                    <h3>PERFECT FOR</h3>
+
+                    <ul>
+
+                        <li>Studying</li>
+
+                        <li>Reading</li>
+
+                        <li>Group Discussions</li>
+
+                        <li>Relaxing with Friends</li>
+
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- Entertainment Overview -->
+        <section class="entertainment-overview">
+
+            <div class="section-heading">
+
+                <p class="section-label">07 / THE NEXUS EXPERIENCE</p>
+
+                <h2>One Building. Endless Possibilities.</h2>
+
+                <p>
+                    Every area at NEON NEXUS offers something different,
+                    but they all share the same purpose: bringing people
+                    together through entertainment, creativity and community.
+                </p>
+
+            </div>
+
+
+            <div class="entertainment-stats">
+
+                <div class="glass-panel entertainment-stat">
+
+                    <span>01</span>
+
+                    <h3>COMPETE</h3>
+
+                    <p>
+                        Challenge yourself and your friends.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-panel entertainment-stat">
+
+                    <span>02</span>
+
+                    <h3>CREATE</h3>
+
+                    <p>
+                        Turn ideas into something real.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-panel entertainment-stat">
+
+                    <span>03</span>
+
+                    <h3>CONNECT</h3>
+
+                    <p>
+                        Meet people and build community.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-panel entertainment-stat">
+
+                    <span>04</span>
+
+                    <h3>CHILL</h3>
+
+                    <p>
+                        Relax and enjoy your time at the Nexus.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Call To Action -->
+        <section class="page-cta">
+
+            <p class="section-label">READY?</p>
+
+            <h2>Choose Your Experience.</h2>
+
+            <a href="membership.html" class="hero-button">
+                BECOME A MEMBER →
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="footer-main">
+
+
+            <!-- Brand -->
+            <div class="footer-brand">
+
+                <h2>NEON NEXUS</h2>
+
+                <p>
+                    Entertainment, creativity and community
+                    in the heart of Gqeberha.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div class="footer-links">
+
+                <h3>EXPLORE</h3>
+
+                <a href="../index.html">Home</a>
+
+                <a href="about-us.html">About Us</a>
+
+                <a href="entertainment.html">Entertainment</a>
+
+                <a href="events.html">Events</a>
+
+                <a href="gallery.html">Gallery</a>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div class="footer-contact">
+
+                <h3>CONNECT</h3>
+
+                <p>Email: <a href="mailto:info@neonnexus.co.za">info@neonnexus.co.za</a></p>
 
                 <p>Phone: 041 123 4567</p>
 
@@ -524,6 +943,38 @@
             </p>
 
         </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+
+                <p>Phone: 041 123 4567</p>
+
+                <p>Gqeberha, South Africa</p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+
+            <p>
+                &copy; 2026 NEON NEXUS. All Rights Reserved.
+            </p>
+
+            <p>
+                ENTERTAINMENT • CREATIVITY • COMMUNITY
+            </p>
+
+        </div>
+
+        <script src="../Assets/js/events.js"></script>
 
     </footer>
 

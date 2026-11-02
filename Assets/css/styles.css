@@ -7442,4 +7442,800 @@ button:active {
         grid-template-columns: 1fr;
     }
 
+
+/* ==========================================================
+   PART 3 ADDITIONS - paste at the very bottom of styles.css
+   Gallery lightbox, events search, contact map and FAQ accordion
+   ========================================================== */
+
+
+/* ==============================
+   HIDDEN ELEMENTS
+   Makes sure the hidden attribute always wins over display rules
+   ============================== */
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==============================
+   LEAFLET SAFETY FIX
+   styles.css sets img { max-width: 100%; display: block } which
+   squashes map tiles. This restores Leaflet's own sizing.
+   ============================== */
+
+.leaflet-container img,
+.leaflet-container .leaflet-tile {
+    max-width: none !important;
+    max-height: none !important;
+}
+
+
+/* ==============================
+   SINGLE PAGE-LOAD ENTRANCE
+   One fade-in for the hero text when a page opens
+   ============================== */
+
+@keyframes heroEnter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.page-hero-content {
+    animation: heroEnter 0.8s ease both;
+}
+
+
+/* ==============================
+   GALLERY LIGHTBOX
+   ============================== */
+
+.gallery-zoomable {
+    cursor: zoom-in;
+}
+
+.gallery-zoomable:focus-visible {
+    outline: 2px solid var(--nexus-cyan);
+    outline-offset: -4px;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4.5rem 1rem 3rem;
+
+    background: rgba(8, 8, 18, 0.93);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    animation: lightboxFade 0.25s ease;
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+@keyframes lightboxFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes lightboxZoom {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: none; }
+}
+
+.lightbox-figure {
+    max-width: min(1100px, 100%);
+    margin: 0;
+    text-align: center;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 72vh;
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 217, 255, 0.1);
+
+    animation: lightboxZoom 0.3s ease;
+}
+
+.lightbox-caption {
+    margin-top: 1rem;
+
+    color: var(--nexus-grey);
+
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.lightbox-counter {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+
+    margin: 0;
+
+    color: var(--nexus-cyan);
+
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+}
+
+/* These selectors beat the global button styles in styles.css */
+.lightbox .lightbox-btn {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+
+    color: var(--nexus-white);
+
+    font-size: 1.8rem;
+    line-height: 1;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid rgba(0, 255, 240, 0.35);
+    border-radius: 50%;
+}
+
+.lightbox .lightbox-btn:hover {
+    background: rgba(0, 217, 255, 0.2);
+    transform: none;
+}
+
+.lightbox .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.lightbox .lightbox-prev,
+.lightbox .lightbox-next {
+    top: 50%;
+    margin-top: -1.5rem;
+}
+
+.lightbox .lightbox-prev { left: 1rem; }
+.lightbox .lightbox-next { right: 1rem; }
+
+@media (max-width: 600px) {
+
+    .lightbox {
+        padding: 4.5rem 0.5rem 4.5rem;
+    }
+
+    /* Move the arrows under the image so they do not cover it */
+    .lightbox .lightbox-prev,
+    .lightbox .lightbox-next {
+        top: auto;
+        bottom: 1rem;
+        margin-top: 0;
+    }
+
+    .lightbox .lightbox-prev { left: calc(50% - 4rem); }
+    .lightbox .lightbox-next { right: calc(50% - 4rem); }
+
+    .lightbox-image {
+        max-height: 60vh;
+    }
+}
+
+
+/* ==============================
+   EVENTS SEARCH AND FILTER
+   ============================== */
+
+.event-controls {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+
+    padding: 1.25rem;
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 1.25rem;
+}
+
+.event-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.event-field label {
+    color: var(--nexus-white);
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+}
+
+.event-field input[type="search"],
+.event-field select {
+    width: 100%;
+
+    padding: 0.85rem 1rem;
+
+    color: var(--nexus-white);
+
+    font-family: inherit;
+    font-size: 0.85rem;
+
+    background: rgba(8, 8, 18, 0.65);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.65rem;
+
+    outline: none;
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-field input[type="search"]:focus,
+.event-field select:focus {
+    border-color: rgba(0, 255, 240, 0.5);
+
+    box-shadow: 0 0 20px rgba(0, 255, 240, 0.08);
+}
+
+.event-field select option {
+    background: var(--nexus-dark-blue);
+    color: var(--nexus-white);
+}
+
+.event-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+
+    margin-bottom: 1.5rem;
+}
+
+.event-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    color: var(--nexus-grey);
+
+    font-size: 0.8rem;
+
+    cursor: pointer;
+}
+
+.event-switch input {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    accent-color: var(--nexus-cyan);
+}
+
+.event-count {
+    margin: 0 auto 0 0;
+
+    color: var(--nexus-cyan);
+
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.event-toolbar .event-clear {
+    padding: 0.5rem 1rem;
+
+    font-size: 0.75rem;
+}
+
+.event-empty {
+    grid-column: 1 / -1;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    border: 1px dashed var(--glass-border);
+    border-radius: 1.25rem;
+}
+
+/* Cards slide in whenever the list is redrawn by a search or filter */
+@keyframes eventCardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.event-grid .event-card {
+    animation: eventCardIn 0.45s ease both;
+}
+
+.event-grid .event-card.is-past {
+    opacity: 0.6;
+}
+
+.event-grid .event-status.is-past {
+    color: var(--nexus-grey);
+    border-color: rgba(167, 167, 184, 0.3);
+}
+
+.event-grid .event-status.is-today {
+    color: var(--nexus-pink);
+    border-color: rgba(255, 43, 214, 0.45);
+}
+
+@media (max-width: 900px) {
+
+    .event-controls {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .event-controls .event-field:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .event-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==============================
+   CONTACT MAP
+   ============================== */
+
+.contact-map-section {
+    padding: 4rem 0 5rem;
+}
+
+.contact-map-section .section-heading {
+    max-width: 750px;
+
+    margin-bottom: 2.5rem;
+}
+
+.map-layout {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 1.25rem;
+
+    align-items: stretch;
+}
+
+.map-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.map-locations {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.map-locations .map-location-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    width: 100%;
+    padding: 1.1rem 1.25rem;
+
+    text-align: left;
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+}
+
+.map-locations .map-location-btn:hover {
+    border-color: rgba(0, 255, 240, 0.45);
+
+    transform: none;
+}
+
+.map-location-name {
+    color: var(--nexus-white);
+
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.map-location-address {
+    color: var(--nexus-grey);
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.map-sidebar .map-show-all {
+    align-self: flex-start;
+
+    font-size: 0.8rem;
+}
+
+/* Interactive Leaflet Map */
+#nexusMap {
+    width: 100%;
+    height: 460px;
+    min-height: 350px;
+
+    isolation: isolate;
+    overflow: hidden;
+
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+}
+
+#nexusMap.map-failed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    color: var(--nexus-grey);
+}
+
+/* Dark popup to match the site */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    color: var(--nexus-white);
+
+    background: var(--nexus-dark-blue);
+
+    border: 1px solid rgba(0, 255, 240, 0.3);
+}
+
+.map-popup h3 {
+    margin: 0 0 0.4rem;
+
+    font-size: 1rem;
+}
+
+.map-popup p {
+    margin: 0 0 0.5rem;
+
+    color: var(--nexus-grey);
+
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.leaflet-container .map-popup a {
+    color: var(--nexus-cyan);
+
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #nexusMap {
+        height: 380px;
+    }
+}
+
+
+/* ==============================
+   FAQ ACCORDION
+   ============================== */
+
+.faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    max-width: 900px;
+}
+
+.faq-item {
+    overflow: hidden;
+
+    background: var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item.is-open {
+    border-color: rgba(0, 255, 240, 0.4);
+
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.08);
+}
+
+.faq-item h3 {
+    margin: 0;
+
+    font-size: 1rem;
+}
+
+/* Overrides the global button styles from styles.css */
+.faq-accordion .faq-trigger {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+
+    text-align: left;
+
+    color: var(--nexus-white);
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    background: transparent;
+
+    border: none;
+    border-radius: 0;
+}
+
+.faq-accordion .faq-trigger:hover {
+    background: rgba(0, 217, 255, 0.05);
+
+    box-shadow: none;
+    transform: none;
+}
+
+.faq-accordion .faq-trigger:focus-visible {
+    outline: 2px solid var(--nexus-cyan);
+    outline-offset: -4px;
+}
+
+.faq-number {
+    color: var(--nexus-cyan);
+
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+}
+
+.faq-question {
+    flex: 1;
+}
+
+/* Plus sign that turns into a minus when the answer is open */
+.faq-icon {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 1rem;
+    height: 1rem;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: var(--nexus-cyan);
+
+    transition: transform 0.3s ease;
+}
+
+.faq-icon::after {
+    transform: rotate(90deg);
+}
+
+.faq-item.is-open .faq-icon::after {
+    transform: rotate(0deg);
+}
+
+.faq-panel {
+    padding: 0 1.5rem 1.25rem 3.9rem;
+}
+
+.faq-panel:not([hidden]) {
+    animation: faqOpen 0.3s ease;
+}
+
+.faq-panel p {
+    margin: 0;
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+@keyframes faqOpen {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 600px) {
+
+    .faq-panel {
+        padding: 0 1.25rem 1.25rem;
+    }
+
+    .faq-accordion .faq-trigger {
+        padding: 1.1rem 1.25rem;
+    }
+}
+
+
+/* ==============================
+   RESPECT REDUCED MOTION
+   People who ask their device for less motion get none
+   ============================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page-hero-content,
+    .lightbox,
+    .lightbox-image,
+    .event-grid .event-card,
+    .faq-panel:not([hidden]) {
+        animation: none;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+        transition: none;
+    }
+}
+
+
+
+
+
+/* ==============================
+   MEMBERSHIP FORM: errors and confirmation card
+   ============================== */
+
+.membership-form .field-error {
+    display: block;
+    min-height: 1.2em;
+
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+
+    color: #ff4d6d;
+}
+
+.membership-form [aria-invalid="true"] {
+    border-color: #ff4d6d;
+
+    box-shadow: 0 0 0 1px #ff4d6d;
+}
+
+.membership-result {
+    margin-top: 1.5rem;
+    padding: 2rem;
+
+    border: 1px solid var(--nexus-cyan);
+    border-radius: 12px;
+
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.18);
+}
+
+.membership-result .result-ref {
+    margin: 0 0 0.5rem;
+
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+
+    color: var(--nexus-cyan);
+}
+
+.membership-result h3 {
+    margin: 0 0 0.75rem;
+}
+
+.membership-result .result-details {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.6rem 1.5rem;
+
+    margin: 1.5rem 0;
+    padding: 1.25rem 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.membership-result .result-details dt {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+
+    opacity: 0.7;
+}
+
+.membership-result .result-details dd {
+    margin: 0;
+
+    overflow-wrap: anywhere;
+}
+
+.membership-result .result-note {
+    font-size: 0.85rem;
+
+    opacity: 0.75;
+}
+
+.membership-result .result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+
+    .membership-result {
+        padding: 1.4rem;
+    }
+
+    .membership-result .result-details {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+    }
+
+    .membership-result .result-details dd {
+        margin-bottom: 0.6rem;
+    }
+}
+
+
 }

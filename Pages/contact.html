@@ -5,17 +5,22 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact NEON NEXUS in Gqeberha. Send the team a question, booking request, feedback or any other message.">
 
-    <title>NEON NEXUS | CONTACT US</title>
+    <title>Contact NEON NEXUS | Gqeberha Map, Hours & Message Form</title>
+    <meta name="description" content="Contact NEON NEXUS in Gqeberha. Find our locations on the map, check opening hours and send the team a question, booking request or feedback.">
+    <meta name="keywords" content="contact NEON NEXUS, Gqeberha entertainment hub, NEON NEXUS map, opening hours, booking request, youth hub contact">
+    <meta property="og:title" content="Contact NEON NEXUS | Gqeberha">
 
+
+    <!-- Leaflet map styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="../Assets/css/styles.css">
 
-    <!-- Contact page extras (works alongside styles.css) -->
+    <!-- Contact page extras -->
     <style>
 
         :root {
-            --nn-accent: #00f0ff;   /* change this one colour to match your theme */
+            --nn-accent: #00f0ff;  
             --nn-alert: #ff4d6d;
         }
 
@@ -160,9 +165,9 @@
 
     <div class="logo-area">
 
-        <img src="../Assets/Images/ChatGPT Image Aug 14, 2026, 12_57_40 PM.png"
-             alt="NEON NEXUS Logo"
-             width="150">
+        <img src="../Assets/Images/neon-nexus-logo.png"
+            alt="NEON NEXUS entertainment and creative hub logo"
+            width="150">
 
         <div class="brand-text">
 
@@ -359,6 +364,48 @@
 
     </section>
 
+
+    <!-- Interactive Map -->
+    <section class="contact-map-section" id="map">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                FIND US / LOCATIONS
+            </p>
+
+            <h2>
+                Two Places To <span>Find Us.</span>
+            </h2>
+
+            <p>
+                Choose a location to zoom in, or click a pin on the map for
+                details and directions.
+            </p>
+
+        </div>
+
+        <div class="map-layout">
+
+            <div class="map-sidebar">
+
+                <ul class="map-locations" id="mapLocations"></ul>
+
+                <button type="button" class="secondary-button map-show-all" id="mapShowAll">
+                    SHOW ALL LOCATIONS
+                </button>
+
+            </div>
+
+            <div id="nexusMap"
+                role="region"
+                aria-label="Map showing the NEON NEXUS locations in Gqeberha"
+                style="width: 100%; height: 460px; min-height: 460px;">
+            </div>
+
+        </div>
+
+    </section>
 
 
     <!-- Operating Hours -->
@@ -624,7 +671,7 @@
             </div>
 
 
-            <form class="contact-form" id="contactForm" novalidate>
+            <form class="contact-form" id="contactForm" action="mailto:info@neonnexus.co.za" method="post" enctype="text/plain" novalidate>
 
 
                 <div class="form-group">
@@ -790,79 +837,83 @@
 
 
 
-    <!-- FAQ -->
-
+    <!-- FAQ (accordion) -->
     <section class="contact-faq">
 
         <div class="section-heading">
 
-            <p class="section-label">
-                06 / FAQ
-            </p>
+            <p class="section-label">06 / FAQ</p>
 
-            <h2>
-                Frequently Asked Questions.
-            </h2>
+            <h2>Frequently Asked Questions.</h2>
 
         </div>
 
+        <div class="faq-accordion">
 
-        <div class="faq-grid">
-
-
-            <article class="faq-card">
-
-                <span>
-                    01
-                </span>
-
+            <div class="faq-item">
                 <h3>
-                    Do I need a membership?
+                    <button type="button" class="faq-trigger" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+                        <span class="faq-number">01</span>
+                        <span class="faq-question">Do I need a membership?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
                 </h3>
+                <div class="faq-panel" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+                    <p>No. Visitors are welcome, but members enjoy exclusive benefits.</p>
+                </div>
+            </div>
 
-                <p>
-                    No. Visitors are welcome, but members enjoy
-                    exclusive benefits.
-                </p>
-
-            </article>
-
-
-            <article class="faq-card">
-
-                <span>
-                    02
-                </span>
-
+            <div class="faq-item">
                 <h3>
-                    Can I book for a group?
+                    <button type="button" class="faq-trigger" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+                        <span class="faq-number">02</span>
+                        <span class="faq-question">Can I book for a group?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
                 </h3>
+                <div class="faq-panel" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+                    <p>Yes. Group bookings can be arranged through our contact team. Choose "Booking request" in the form above.</p>
+                </div>
+            </div>
 
-                <p>
-                    Yes. Group bookings can be arranged through
-                    our contact team.
-                </p>
-
-            </article>
-
-
-            <article class="faq-card">
-
-                <span>
-                    03
-                </span>
-
+            <div class="faq-item">
                 <h3>
-                    Do you host private events?
+                    <button type="button" class="faq-trigger" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+                        <span class="faq-number">03</span>
+                        <span class="faq-question">Do you host private events?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
                 </h3>
+                <div class="faq-panel" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+                    <p>Yes. NEON NEXUS can host private events and community gatherings. Choose "Private event" in the form above.</p>
+                </div>
+            </div>
 
-                <p>
-                    Yes. NEON NEXUS can host private events
-                    and community gatherings.
-                </p>
+            <div class="faq-item">
+                <h3>
+                    <button type="button" class="faq-trigger" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+                        <span class="faq-number">04</span>
+                        <span class="faq-question">How much does a membership cost?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div class="faq-panel" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+                    <p>Student membership is R99 per month, Premium is R199 and VIP is R299. Use the <a href="enquiry.html">enquiry form</a> for an instant cost breakdown.</p>
+                </div>
+            </div>
 
-            </article>
-
+            <div class="faq-item">
+                <h3>
+                    <button type="button" class="faq-trigger" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">
+                        <span class="faq-number">05</span>
+                        <span class="faq-question">Where are the events held?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </button>
+                </h3>
+                <div class="faq-panel" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+                    <p>Most tournaments and live shows take place at the NEXUS Arena. Creative workshops run at the main hub. Both are on the map above.</p>
+                </div>
+            </div>
 
         </div>
 
@@ -1364,9 +1415,7 @@
                 CONNECT
             </h3>
 
-            <p>
-                Email: info@neonnexus.co.za
-            </p>
+            <p>Email: <a href="mailto:info@neonnexus.co.za">info@neonnexus.co.za</a></p>
 
             <p>
                 Phone: (041) 123 4567
@@ -1396,6 +1445,9 @@
 
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="../Assets/js/contact-map.js"></script>
+<script src="../Assets/js/faq-accordion.js"></script>
 
 </body>
 

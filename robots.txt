@@ -1,0 +1,7 @@
+# robots.txt for NEON NEXUS (Part 3 SEO)
+# Allow all search engine crawlers to index the whole site
+User-agent: *
+Allow: /
+
+# Tell crawlers where to find the sitemap
+Sitemap: https://hay-67.github.io/Website/sitemap.xml

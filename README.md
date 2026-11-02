@@ -372,4 +372,12 @@ YouTube (30 August, 2022) CSS Tutorial - Full Course for Beginners. Accessed: 18
 
 YouTube (17 October 2024) Responsive Web Design Tutorial. Accessed: 18 September 2026. [Online video]. Available at: https://youtu.be/-G-zic_L50A?si=slm2BjnW2o9-KiLh
 
+YouTube (5 July 2022) Fetch API in 4 Minutes (GET, POST, PUT, DELETE | JSON). Accessed:  28 October 2026. [Online video]. Available at: https://youtu.be/XHokFQeQ6Lk
+
+YouTube (14 December 2018)  Leaflet Tutorial 1: Create a map with a marker using JavaScript. Accessed: 28 October 2026. [Online video]. Available at: https://youtu.be/wVnimcQsuwk
+
+YouTube (16 April 2026)  The Complete SEO & AI SEO Course for 2026 (Full Beginner’s Guide). Accessed: 28 October 2026. [Online video]. Available at: https://youtu.be/7DRO4rEIHDk
+
+YouTube (16 September 2018)  How To Create Image Gallery Using HTML, CSS and Javascript | Lightbox Gallery. Accessed: 28 October 2026. [Online video]. Available at: https://youtu.be/TSRtBISvsh4
+
 ---

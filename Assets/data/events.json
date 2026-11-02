@@ -1,0 +1,10 @@
+[
+  { "id": 1, "title": "Esports Championship",       "category": "Gaming",           "date": "2026-09-25", "time": "14:00", "venue": "The Arena" },
+  { "id": 2, "title": "Community Art Workshop",     "category": "Creative",         "date": "2026-10-05", "time": "16:00", "venue": "Art District" },
+  { "id": 3, "title": "Monthly Esports Championship","category": "Gaming",          "date": "2026-11-14", "time": "14:00", "venue": "The Arena" },
+  { "id": 4, "title": "Open Mic Night",             "category": "Live Performance", "date": "2026-11-20", "time": "18:00", "venue": "The Arena" },
+  { "id": 5, "title": "Community Art Workshop",     "category": "Creative",         "date": "2026-11-28", "time": "16:00", "venue": "Art District" },
+  { "id": 6, "title": "Live Music Showcase",        "category": "Music",            "date": "2026-12-05", "time": "19:00", "venue": "The Arena" },
+  { "id": 7, "title": "Holiday Gaming Marathon",    "category": "Gaming",           "date": "2026-12-12", "time": "12:00", "venue": "The Grid" },
+  { "id": 8, "title": "Graffiti Wall Jam",          "category": "Creative",         "date": "2026-12-19", "time": "15:00", "venue": "Art District" }
+]
